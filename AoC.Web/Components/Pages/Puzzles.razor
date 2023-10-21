@@ -1,0 +1,49 @@
+@page "/puzzles/{year:int}"
+@attribute [RenderModeInteractiveServer]
+
+<PageTitle>@Year</PageTitle>
+
+    <div class="container">
+    <div class="h2">Year: @Year</div>
+    <div class="row">
+        <div class="col-xl-2">
+            <ul>
+                @foreach (var day in Days)
+                {
+                    <a class="action" @onclick="@(() => ActivateDay(day.Key))" @onclick:preventDefault>[@day.Key]</a><br>
+                }
+            </ul>
+        </div>
+        <div class="col-xl-10">
+            @if (@ActiveDay != 0)
+            {
+                <div class="container">
+                    <div class="h3">Day: @ActiveDay</div>
+                    <div class="row">
+                        <div class="col star">Star 1
+                            <div class="row">
+                                <div class="col"><a class="action" @onclick="@(() => RunStar1())" @onclick:preventDefault>[Run Test]</a></div>
+                                <div class="col">@Star1</div>
+                            </div>
+                            <div class="row">
+                                <div class="col"><a class="action" @onclick="@(() => RunStar1())" @onclick:preventDefault>[Run]</a></div>
+                                <div class="col">@Star1</div>
+                            </div>
+                        </div>
+                        <div class="col star">Star 2
+                            <div class="row">
+                                <div class="col"><a class="action" @onclick="@(() => RunStar2())" @onclick:preventDefault>[Run Test]</a></div>
+                                <div class="col">@Star2</div>
+                            </div>
+                            <div class="row">
+                                <div class="col"><a class="action" @onclick="@(() => RunStar2())" @onclick:preventDefault>[Run]</a></div>
+                                <div class="col">@Star2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

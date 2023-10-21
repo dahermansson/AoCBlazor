@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch AoC.Cli",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceRoot}/AoC.Cli/bin/Debug/net8.0/AoC.Cli.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}/AoC.Cli",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": ".NET Core Launch AoC.Web",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceRoot}/AoC.Web/bin/Debug/net8.0/AoC.Web.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}/AoC.Web",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
+    ]
+}
