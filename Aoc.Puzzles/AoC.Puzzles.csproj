@@ -10,4 +10,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+<ItemGroup>
+  <EmbeddedResource Include="Y2016\Inputs\*.txt">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </EmbeddedResource>
+</ItemGroup>
+
+
+
 </Project>

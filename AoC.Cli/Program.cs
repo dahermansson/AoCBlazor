@@ -2,7 +2,7 @@
 using AoC.Puzzles;
 
 const int YEAR = Puzzles.Y2016;
-int dayToRun = 1;
+string dayToRun = 1.ToString("D2");
 
 
 var day = Puzzles.GetDay(YEAR, dayToRun);

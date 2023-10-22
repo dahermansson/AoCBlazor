@@ -10,12 +10,12 @@
             <ul>
                 @foreach (var day in Days)
                 {
-                    <a class="action" @onclick="@(() => ActivateDay(day.Key))" @onclick:preventDefault>[@day.Key]</a><br>
+                    <a class="action" @onclick="@(() => ActivateDay(day))" @onclick:preventDefault>[@day]</a><br>
                 }
             </ul>
         </div>
         <div class="col-xl-10">
-            @if (@ActiveDay != 0)
+            @if (@ActiveDay != "")
             {
                 <div class="container">
                     <div class="h3">Day: @ActiveDay</div>
@@ -43,7 +43,6 @@
                     </div>
                 </div>
             }
-
         </div>
     </div>
 </div>

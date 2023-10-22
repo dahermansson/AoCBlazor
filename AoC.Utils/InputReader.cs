@@ -6,7 +6,14 @@ namespace AoC.Utils
 {
     public static class InputReader
     {
-        public static string GetInput(string filename) => File.ReadAllText(Path.Combine("inputs", filename));
+        public static string GetInput(int year, string day)
+        {
+            #if DEBUG
+                return File.ReadAllText(Path.Combine("bin", "Debug", "net8.0", $"Y{year}", "inputs", $"{day}.txt"));
+            #else
+                return File.ReadAllText(Path.Combine($"Y{year}", "inputs", $"{day}.txt"));
+            #endif
+        }
         public static string[] GetInputLines(string filename) => File.ReadAllLines(Path.Combine("inputs", filename));
         public static T[] GetInputLines<T>(string filename) => File.ReadAllLines(Path.Combine("inputs", filename)).Select( s => (T) Convert.ChangeType(s, typeof(T))).ToArray();
         public static string[][] GetInputLinesMatrix(string filename) => 
