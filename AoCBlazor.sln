@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AoC.Puzzles", "AoC.Puzzles\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AoC.Cli", "AoC.Cli\AoC.Cli.csproj", "{0B08948F-1396-488E-8D86-9E326E5087AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AoC.Test", "AoC.Test\AoC.Test.csproj", "{C36BD452-2A42-4300-A1A7-CE0490BDAB6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0B08948F-1396-488E-8D86-9E326E5087AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B08948F-1396-488E-8D86-9E326E5087AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B08948F-1396-488E-8D86-9E326E5087AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C36BD452-2A42-4300-A1A7-CE0490BDAB6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C36BD452-2A42-4300-A1A7-CE0490BDAB6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C36BD452-2A42-4300-A1A7-CE0490BDAB6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C36BD452-2A42-4300-A1A7-CE0490BDAB6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

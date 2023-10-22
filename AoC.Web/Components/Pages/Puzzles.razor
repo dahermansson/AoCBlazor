@@ -22,22 +22,20 @@
                     <div class="row">
                         <div class="col star">Star 1
                             <div class="row">
-                                <div class="col"><a class="action" @onclick="@(() => RunStar1())" @onclick:preventDefault>[Run Test]</a></div>
-                                <div class="col">@Star1</div>
-                            </div>
-                            <div class="row">
                                 <div class="col"><a class="action" @onclick="@(() => RunStar1())" @onclick:preventDefault>[Run]</a></div>
                                 <div class="col">@Star1</div>
+                                @if(Star1Ms > -1){
+                                    <div class="col">@Star1Ms ms</div>
+                                }
                             </div>
                         </div>
                         <div class="col star">Star 2
                             <div class="row">
-                                <div class="col"><a class="action" @onclick="@(() => RunStar2())" @onclick:preventDefault>[Run Test]</a></div>
-                                <div class="col">@Star2</div>
-                            </div>
-                            <div class="row">
                                 <div class="col"><a class="action" @onclick="@(() => RunStar2())" @onclick:preventDefault>[Run]</a></div>
                                 <div class="col">@Star2</div>
+                                @if(Star2Ms > -1){
+                                    <div class="col">@Star2Ms ms</div>
+                                }
                             </div>
                         </div>
                     </div>
