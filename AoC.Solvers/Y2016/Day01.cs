@@ -1,5 +1,4 @@
 ﻿using AoC.Utils;
-using System.IO;
 namespace AoC.Solvers.Y2016;
 
 public class Day01: IDay

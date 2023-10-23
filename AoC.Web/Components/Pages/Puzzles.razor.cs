@@ -14,11 +14,18 @@ public partial class Puzzles
     public string Star1 { get; set; } = string.Empty;
     public long Star1Ms {get; set; } = -1;
     public long Star2Ms {get; set; } = -1;
+    private int _currentYear = -1;
 
     public string Star2 { get; set; } = string.Empty;
-    protected override Task OnInitializedAsync()
+
+    protected override Task OnParametersSetAsync()
     {
-        Days = SolversManager.GetDays(2016);
+        if (_currentYear != Year)
+        {
+            _currentYear = Year;
+            ActiveDay = "";
+            Days = SolversManager.GetDays(Year);
+        }
         return Task.CompletedTask;
     }
 

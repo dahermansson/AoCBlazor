@@ -1,9 +1,7 @@
-﻿using System;
-using AoC.Utils;
-
+﻿using AoC.Utils;
 namespace AoC.Solvers.Y2015;
 
-public class Day01 : IDay
+public class Day01: IDay
 {
     public Day01(string input)
     {
