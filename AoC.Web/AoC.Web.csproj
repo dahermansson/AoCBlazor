@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <ProjectReference Include="..\Aoc.Puzzles\Aoc.Puzzles.csproj" />
+    <ProjectReference Include="..\AoC.Solvers\AoC.Solvers.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

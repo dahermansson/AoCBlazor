@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AoC.Utils\AoC.Utils.csproj" />
-    <ProjectReference Include="..\Aoc.Puzzles\Aoc.Puzzles.csproj" />
+    <ProjectReference Include="..\AoC.Solvers\AoC.Solvers.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

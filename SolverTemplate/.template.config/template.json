@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Microsoft",
+    "classifications": [
+      "Common"
+    ],
+    "name": "Solver",
+    "generatorVersions": "[1.0.0.0-*)",
+    "description": "Creates a new AoC Solver",
+    "tags": {
+      "language": "C#",
+      "type": "item"
+    },
+    "groupIdentity": "AoC.Solver",
+    "precedence": "0",
+    "identity": "AoC.Solver.Class.CSharp",
+    "shortName": "aocsolver",
+    "sourceName": "Dayxx",
+    "preferDefaultName": true,
+    "defaultName": "Dayxx",
+    "primaryOutputs": [
+      {
+        "path": "Dayxx.cs"
+      }
+    ],
+    "symbols": {
+      "DefaultNamespace": {
+        "type": "bind",
+        "binding": "msbuild:RootNamespace",
+        "replaces": "Company.ClassLibrary1"
+      }
+    },
+    "constraints": {
+      "csharp-only": {
+        "type": "project-capability",
+        "args": "CSharp"
+      }
+    }
+  }

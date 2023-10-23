@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aoc.Puzzles\Aoc.Puzzles.csproj" />
+    <ProjectReference Include="..\AoC.Solvers\AoC.Solvers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

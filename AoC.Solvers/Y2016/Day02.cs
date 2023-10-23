@@ -1,9 +1,14 @@
 ﻿using AoC.Utils;
 
-namespace Aoc.Puzzles.Y2016;
+namespace AoC.Solvers.Y2016;
 
 public class Day02 : IDay
 {
+    public Day02(string input)
+    {
+        Input = input;
+    }
+    private string Input {get; set;}
     public string Output => throw new NotImplementedException();
 
     public int Star1()

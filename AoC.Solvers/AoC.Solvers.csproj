@@ -11,7 +11,7 @@
   </PropertyGroup>
 
 <ItemGroup>
-  <EmbeddedResource Include="Y2016\Inputs\*.txt">
+  <EmbeddedResource Include=".\*\Inputs\*.txt">
     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
   </EmbeddedResource>
 </ItemGroup>

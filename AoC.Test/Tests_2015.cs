@@ -1,12 +1,14 @@
 namespace AoC.Test;
 
-using AoC.Solvers.Y2016;
-public class Tests_2016
+using AoC.Solvers.Y2015;
+public class Tests_2015
 {
     [Theory]
-    [InlineData("R2, L3", 5)]
-    [InlineData("R2, R2, R2", 2)]
-    [InlineData("R5, L5, R5, R3", 12)]
+    [InlineData("(())", 0)]
+    [InlineData("()()", 0)]
+    [InlineData("))(((((", 3)]
+    [InlineData("())", -1)]
+    [InlineData(")())())", -3)]
     public void Day1_Star1(string input, int res)
     {
         var actor = new Day01(input);
@@ -14,7 +16,7 @@ public class Tests_2016
     }
 
     [Theory]
-    [InlineData("R8, R4, R4, R8", 4)]
+    [InlineData("()())", -1)]
     public void Day1_Star2(string input, int res)
     {
         var actor = new Day01(input);

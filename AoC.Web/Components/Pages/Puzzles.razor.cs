@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using AoC.Utils;
 using System.Diagnostics;
+using AoC.Solvers;
 namespace AoC.Web.Components.Pages;
 
 public partial class Puzzles
@@ -17,14 +18,14 @@ public partial class Puzzles
     public string Star2 { get; set; } = string.Empty;
     protected override Task OnInitializedAsync()
     {
-        Days = AoC.Puzzles.Puzzles.GetDays(2016);
+        Days = SolversManager.GetDays(2016);
         return Task.CompletedTask;
     }
 
     protected Task ActivateDay(string day)
     {
         ActiveDay = day;
-        ActivePuzzle = AoC.Puzzles.Puzzles.GetDay(Year, day) ?? throw new Exception("Day missing");
+        ActivePuzzle = SolversManager.GetDay(Year, day) ?? throw new Exception("Day missing");
         Star1 = string.Empty;
         Star2 = string.Empty;
         Star1Ms = -1;

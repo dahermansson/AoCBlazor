@@ -8,11 +8,15 @@ namespace AoC.Utils
     {
         public static string GetInput(int year, string day)
         {
-            #if DEBUG
-                return File.ReadAllText(Path.Combine("bin", "Debug", "net8.0", $"Y{year}", "inputs", $"{day}.txt"));
-            #else
-                return File.ReadAllText(Path.Combine($"Y{year}", "inputs", $"{day}.txt"));
-            #endif
+        #if DEBUG
+            string path = Path.Combine("bin", "Debug", "net8.0", $"Y{year}", "inputs", $"{day}.txt");
+        #else
+            string path = Path.Combine($"Y{year}", "inputs", $"{day}.txt");
+        #endif
+            if(File.Exists(path))
+                return File.ReadAllText(path);
+            else
+                return string.Empty;
         }
         public static string[] GetInputLines(string filename) => File.ReadAllLines(Path.Combine("inputs", filename));
         public static T[] GetInputLines<T>(string filename) => File.ReadAllLines(Path.Combine("inputs", filename)).Select( s => (T) Convert.ChangeType(s, typeof(T))).ToArray();
