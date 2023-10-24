@@ -1,5 +1,4 @@
-﻿using System;
-using AoC.Utils;
+﻿using AoC.Utils;
 
 namespace Company.ClassLibrary1;
 
