@@ -10,8 +10,10 @@ public static class SolversManager
     public static List<string> GetDays(int year)
     {
         var theList = Assembly.GetExecutingAssembly().GetTypes()
-                      .Where(t =>t.GetCustomAttribute<System.Runtime.CompilerServices.CompilerGeneratedAttribute>() == null &&
-                      t.Namespace == $"AoC.Solvers.Y{year}").Select(t => t.Name.Remove(0,3)).ToList();
+                        .Where(t => t.GetCustomAttribute<System.Runtime.CompilerServices.CompilerGeneratedAttribute>() == null &&
+                        t != null &&
+                        t.Namespace == $"AoC.Solvers.Y{year}" && 
+                        !t.AssemblyQualifiedName!.Contains("+")).Select(t => t.Name.Remove(0,3)).ToList();
         return theList;
     }
 

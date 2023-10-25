@@ -22,6 +22,25 @@ public class Tests_2015
         var actor = new Day01(input);
         Assert.Equal(res, actor.Star2());
     }
+
+    [Theory]
+    [InlineData("2x3x4", 52)]
+    [InlineData("1x1x10", 42)]
+    public void Day2_Star1(string input, int res)
+    {
+        var actor = new Day02(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [Theory]
+    [InlineData("2x3x4", 34)]
+    [InlineData("1x1x10", 14)]
+    public void Day2_Star2(string input, int res)
+    {
+        var actor = new Day02(input);
+        Assert.Equal(res, actor.Star2());
+    }
+
     [Theory]
     [InlineData("turn on 0,0 through 999,999", 1_000_000)]
     [InlineData("toggle 0,0 through 999,0", 1000)]
