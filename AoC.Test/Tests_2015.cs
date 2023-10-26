@@ -83,9 +83,13 @@ public class Tests_2015
     }
 
     [Theory]
-    [InlineData("^v", 3)]
-    [InlineData("^>v<", 3)]
-    [InlineData("^v^v^v^v^v", 11)]
+
+    [InlineData("aaa", 0)]
+    [InlineData("abcdefeghi", 0)]
+    [InlineData("qjhvhtzxzqqjkmpb", 1)]
+    [InlineData("xxyxx", 1)]
+    [InlineData("uurcxstgmygtbstg", 0)]
+    [InlineData("ieodomkazucvgmuy", 0)]
     public void Day5_Star2(string input, int res)
     {
         var actor = new Day05(input);

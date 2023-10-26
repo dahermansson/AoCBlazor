@@ -6,20 +6,28 @@ public class Day05: IDay
 {
     public Day05(string input)
     {
-        Input = input;
+        Input = InputParsers.GetInputLines(input);
     }
     public string Output => throw new NotImplementedException();
 
-    private string Input {get; set;}
+    private string[] Input {get; set;}
 
-    public int Star1() => InputParsers.GetInputLines(Input).Count(t => IsValid(t));
+    public int Star1() => Input.Count(t => IsValidStar1(t));
 
-    public int Star2()
+    public int Star2() => Input.Count(t => IsValidStar2(t));
+    
+    private bool Repeats(string str)
     {
-        return 0;
+       return str.SkipLast(2).Select((v, i) => (v,i)).Any(t => str.Any(v => str[t.i] == str[t.i+2]));
     }
 
-    private bool IsValid(string s) => s.Count(t => "aeiou".Contains(t)) > 2 && HasDoubleLetter(s) && !Containsabcdpqxy(s);
+    private bool MoreThenTwoPair(string str)
+    {
+        var pairs = str.SkipLast(1).Select((v, i) => $"{v}{str[i+1]}").ToArray();
+        return pairs.Any(t => str.Split(t).Count() > 2);
+    }
+    private bool IsValidStar2(string s) => MoreThenTwoPair(s) && Repeats(s);
+    private bool IsValidStar1(string s) => s.Count(t => "aeiou".Contains(t)) > 2 && HasDoubleLetter(s) && !Containsabcdpqxy(s);
 
     private bool HasDoubleLetter(string s)
     {
