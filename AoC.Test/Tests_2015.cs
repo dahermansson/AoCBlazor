@@ -82,24 +82,25 @@ public class Tests_2015
         Assert.Equal(res, actor.Star1());
     }
 
-    [Theory]
-
+    
     [InlineData("aaa", 0)]
     [InlineData("abcdefeghi", 0)]
     [InlineData("qjhvhtzxzqqjkmpb", 1)]
     [InlineData("xxyxx", 1)]
     [InlineData("uurcxstgmygtbstg", 0)]
     [InlineData("ieodomkazucvgmuy", 0)]
+    [Theory]
     public void Day5_Star2(string input, int res)
     {
         var actor = new Day05(input);
         Assert.Equal(res, actor.Star2());
     }
 
-    [Theory]
+    
     [InlineData("turn on 0,0 through 999,999", 1_000_000)]
     [InlineData("toggle 0,0 through 999,0", 1000)]
     [InlineData("turn off 499,499 through 500,500", 0)]
+    [Theory]
     public void Day6_Star1(string input, int res)
     {
         var actor = new Day06(input);
@@ -113,5 +114,22 @@ public class Tests_2015
     {
         var actor = new Day06(input);
         Assert.Equal(res, actor.Star2());
+    }
+
+    [InlineData("""
+    123 -> x
+    456 -> y
+    x AND y -> d
+    x OR y -> e
+    x LSHIFT 2 -> f
+    y RSHIFT 2 -> g
+    NOT x -> h
+    NOT y -> i
+    """, 65079)]
+    [Theory]
+    public void Day7_Star1(string input, int res)
+    {
+        var actor = new Day07(input);
+        Assert.Equal(res, actor.Star1());
     }
 }
