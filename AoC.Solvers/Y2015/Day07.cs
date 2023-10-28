@@ -89,6 +89,8 @@ public class Day07: IDay
 
     public int Star2()
     {
+        if(a_wires == 0)
+            Star1();
         Wires.Clear();
         var instructions = Input.Select(t => ParseInstruction(t)).Reverse().ToList();
         

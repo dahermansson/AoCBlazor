@@ -182,4 +182,19 @@ public class Tests_2015
         var actor = new Day09(input);
         Assert.Equal(res, actor.Star2());
     }
+
+    [InlineData("1", 82350)]
+    [Theory]
+    public void Day10_Star1(string input, int res)
+    {
+        var actor = new Day10(input);
+        Assert.Equal(res, actor.Star1());
+    }
+    [InlineData("1", 1166642)]
+    [Theory]
+    public void Day10_Star2(string input, int res)
+    {
+        var actor = new Day10(input);
+        Assert.Equal(res, actor.Star2());
+    }
 }

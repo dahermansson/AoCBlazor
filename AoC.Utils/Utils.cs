@@ -29,7 +29,6 @@ namespace AoC.Utils
 
         public static IEnumerable<int> IndexOfMany<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
-            //source.Select((e, i) => new {Index = i, Value = e}).Where(t => predicate(t.Value)).Select( t => t.Index);
             int i = 0;
             foreach (var element in source)
             {
