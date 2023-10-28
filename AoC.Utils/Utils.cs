@@ -1,4 +1,4 @@
-    using System.Linq;
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections;
@@ -10,7 +10,7 @@ namespace AoC.Utils
     public static class Utils
     {
         public static string RemoveWhiteSpaces(this string s) => new string(s.ToCharArray().Where(c => !char.IsWhiteSpace(c)).ToArray());
-        public static char[] ABC { get{return Enumerable.Range(97, 26).Select(n => (char)n).ToArray();}}
+        public static char[] ABC { get { return Enumerable.Range(97, 26).Select(n => (char)n).ToArray(); } }
         public static readonly string NL = "\r\n";
         public static readonly string DNL = $"{NL}{NL}";
         public static int ManhattanDistance(int x, int y) => Math.Abs(x) + Math.Abs(y);
@@ -74,7 +74,7 @@ namespace AoC.Utils
         {
             var temp = new BitArray(bits.Length);
             int index = 0;
-            for (int i = bits.Length -1; i > -1; i--)
+            for (int i = bits.Length - 1; i > -1; i--)
                 temp[index++] = bits[i];
             int[] res = new int[1];
             temp.CopyTo(res, 0);
@@ -84,7 +84,7 @@ namespace AoC.Utils
         {
             var temp = new BitArray(bits.Length);
             int index = 0;
-            for (int i = bits.Length -1; i > -1; i--)
+            for (int i = bits.Length - 1; i > -1; i--)
                 temp[index++] = bits[i];
             var bArray = new Byte[8];
             temp.CopyTo(bArray, 0);
@@ -117,6 +117,32 @@ namespace AoC.Utils
                 for (int i = 0; i < c; i++)
                     foreach (var p in permutations(source.Take(i).Concat(source.Skip(i + 1))))
                         yield return source.Skip(i).Take(1).Concat(p);
+        }
+
+        public static List<List<string>> GetPermutations(this List<string> list)
+        {
+            var res = new List<List<string>>();
+            return DoPermutations(list, 0, list.Count - 1, res);
+        }
+
+        public static List<List<string>> DoPermutations(List<string> list, int start, int end, List<List<string>> res)
+        {
+            if (start == end)
+                res.Add(new List<string>(list));
+            else
+            {
+                for (int i = start; i <= end; i++)
+                {
+                    var temp = list[start];
+                    list[start] = list[i];
+                    list[i] = temp;
+                    DoPermutations(list, start + 1, end, res);
+                    temp = list[start];
+                    list[start] = list[i];
+                    list[i] = temp;
+                }
+            }
+            return res;
         }
 
         public static int ExtraxtInteger(this string s) => int.Parse(Regex.Match(s, @"-?\d+").Value);

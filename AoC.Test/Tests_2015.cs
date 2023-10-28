@@ -158,4 +158,28 @@ public class Tests_2015
         var actor = new Day08(input);
         Assert.Equal(res, actor.Star2());
     }
+
+    [InlineData("""
+        London to Dublin = 464
+        London to Belfast = 518
+        Dublin to Belfast = 141
+        """, 605)]
+    [Theory]
+    public void Day9_Star1(string input, int res)
+    {
+        var actor = new Day09(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+        London to Dublin = 464
+        London to Belfast = 518
+        Dublin to Belfast = 141
+        """, 982)]
+    [Theory]
+    public void Day9_Star2(string input, int res)
+    {
+        var actor = new Day09(input);
+        Assert.Equal(res, actor.Star2());
+    }
 }
