@@ -218,4 +218,22 @@ public class Tests_2015
         actor.Star2();
         Assert.Equal(res, actor.Output);
     }
+    [InlineData("[1,2,3]", 6)]
+    [InlineData("{\"a\":2,\"b\":4}", 6)]
+    [InlineData("{\"a\":[-1,1]}", 0)]
+    [Theory]
+    public void Day12_Star1(string input, int res)
+    {
+        var actor = new Day12(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("{\"a\":2,\"b\":4}", 6)]
+    [InlineData("[1,{\"c\":\"red\",\"b\":2},3]", 4)]
+    [Theory]
+    public void Day12_Star2(string input, int res)
+    {
+        var actor = new Day12(input);
+        Assert.Equal(res, actor.Star2());
+    }
 }
