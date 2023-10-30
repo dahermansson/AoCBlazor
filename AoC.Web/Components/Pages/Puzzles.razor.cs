@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Components;
 using AoC.Utils;
 using System.Diagnostics;
 using AoC.Solvers;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 namespace AoC.Web.Components.Pages;
 
-public partial class Puzzles
+public partial class Puzzles: ComponentBase
 {
     [Parameter]
     public int Year { get; set; }
@@ -15,6 +17,10 @@ public partial class Puzzles
     public long Star1Ms {get; set; } = -1;
     public long Star2Ms {get; set; } = -1;
     private int _currentYear = -1;
+    private string Star1Button { get; set; } = "[Run]";
+    private string Star2Button { get; set; }= "[Run]";
+    private bool Star1ButtonStatus { get; set; } = false;
+    private bool Star2ButtonStatus { get; set; } = false;
 
     public string Star2 { get; set; } = string.Empty;
 
@@ -39,28 +45,34 @@ public partial class Puzzles
         Star2Ms = -1;
         return Task.CompletedTask;
     }
-    protected Task RunStar1()
+    protected async Task RunStar1()
     {
+        Star1Button = "Running...";
+        Star1ButtonStatus = true;
         var sw = new Stopwatch();
         sw.Start();
-        var res = ActivePuzzle.Star1();
+        var res = await Task.Run(() => ActivePuzzle.Star1());
         sw.Stop();
         Star1Ms = sw.ElapsedMilliseconds;
         Star1 = res != -1 ? res.ToString() : ActivePuzzle.Output;
         sw.Reset();
-        return Task.CompletedTask;
+        Star1Button = "[Run]";
+        Star1ButtonStatus = false;
     }
 
-    protected Task RunStar2()
+    protected async Task RunStar2()
     {
+        Star2Button = "Running...";
+        Star2ButtonStatus = true;
         var sw = new Stopwatch();
         sw.Start();
-        var res = ActivePuzzle.Star2();
+        var res = await Task.Run(() => ActivePuzzle.Star2());
         sw.Stop();
         Star2Ms = sw.ElapsedMilliseconds;
         Star2 = res != -1 ? res.ToString() : ActivePuzzle.Output;
         sw.Reset();
-        return Task.CompletedTask;
+        Star2Button = "[Run]";
+        Star2ButtonStatus = false;
     }
 
 }

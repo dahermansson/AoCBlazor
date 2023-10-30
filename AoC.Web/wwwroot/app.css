@@ -9,6 +9,18 @@ html, body {
     min-width: 60em;
   }
   
+  button {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    color: #009000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  button:hover, button:active:focus {
+    color: #99ff99;
+  }
+
   a {
     text-decoration: none;
     color: #009900;
