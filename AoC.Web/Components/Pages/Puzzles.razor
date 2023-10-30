@@ -10,7 +10,7 @@
             <ul>
                 @foreach (var day in Days)
                 {
-                    <a class="action" @onclick="@(() => ActivateDay(day))" @onclick:preventDefault>[@day]</a><br>
+                    <button class="action" @onclick="@(() => ActivateDay(day))">[@day]</button><br>
                 }
             </ul>
         </div>
@@ -39,6 +39,14 @@
                             </div>
                         </div>
                     </div>
+                    @if(SourceLink != string.Empty)
+                    {
+                        <div class="row">
+                            <div class="col source">
+                                <a target="_blank" href="@SourceLink">Source@Github</a>
+                            </div>
+                        </div>
+                    }
                 </div>
             }
         </div>
