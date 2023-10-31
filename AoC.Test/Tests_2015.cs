@@ -278,4 +278,26 @@ public class Tests_2015
         var actor = new Day13(input);
         Assert.Equal(res, actor.Star2());
     }
+
+    [InlineData("""
+    Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.
+    Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.
+    """, 1120)]
+    [Theory]
+    public void Day14_Star1(string input, int res)
+    {
+        var actor = new Day14(input, 1000);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+    Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.
+    Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.
+    """, 689)]
+    [Theory]
+    public void Day14_Star2(string input, int res)
+    {
+        var actor = new Day14(input, 1000);
+        Assert.Equal(res, actor.Star2());
+    }
 }
