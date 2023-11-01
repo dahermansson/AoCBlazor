@@ -1,5 +1,4 @@
-﻿using System.Net;
-using AoC.Utils;
+﻿using AoC.Utils;
 
 namespace AoC.Solvers.Y2015;
 
