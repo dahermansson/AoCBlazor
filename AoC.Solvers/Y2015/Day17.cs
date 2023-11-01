@@ -50,7 +50,7 @@ public class Day17: IDay
             int c = containers[i];
             for(int a = i+1;a<containers.Count;a++)
                 notUsed.Add(containers[a]);    
-            Sum([.. notUsed], target, [..used, c], ref count);
+            Sum([..notUsed], target, [..used, c], ref count);
         }
     }
 
@@ -77,7 +77,7 @@ public class Day17: IDay
             int c = containers[i];
             for(int a = i+1;a<containers.Count;a++)
                 notUsed.Add(containers[a]);    
-            SumMin([.. notUsed], target, [..used, c], ref count, ref min);
+            SumMin([..notUsed], target, [..used, c], ref count, ref min);
         }
     }
 }
