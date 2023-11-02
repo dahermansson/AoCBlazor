@@ -300,4 +300,54 @@ public class Tests_2015
         var actor = new Day14(input, 1000);
         Assert.Equal(res, actor.Star2());
     }
+
+    [InlineData("""
+    Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8
+    Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3
+    """, 62842880)]
+    [Theory]
+    public void Day15_Star1(string input, int res)
+    {
+        var actor = new Day15(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+    Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8
+    Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3
+    """, 57600000)]
+    [Theory]
+    public void Day15_Star2(string input, int res)
+    {
+        var actor = new Day15(input);
+        Assert.Equal(res, actor.Star2());
+    }
+
+    [InlineData("""
+    20
+    15
+    10
+    5
+    5
+    """, 4)]
+    [Theory]
+    public void Day17_Star1(string input, int res)
+    {
+        var actor = new Day17(input, 25);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+    20
+    15
+    10
+    5
+    5
+    """, 3)]
+    [Theory]
+    public void Day17_Star2(string input, int res)
+    {
+        var actor = new Day17(input, 25);
+        Assert.Equal(res, actor.Star2());
+    }
 }

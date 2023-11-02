@@ -23,7 +23,8 @@ public partial class Puzzles: ComponentBase
     private bool Star2ButtonStatus { get; set; } = false;
     private string SourceLink { get; set; } = string.Empty;
     private string BaseUrlSource = "https://raw.githubusercontent.com/dahermansson/AoCBlazor/main/AoC.Solvers/Y{0}/Day{1}.cs";
-
+    private string BaseUrlPuzzle = "https://adventofcode.com/{0}/day/{1}";
+    private string PuzzleLink { get; set; } = string.Empty;
     public string Star2 { get; set; } = string.Empty;
 
     protected override Task OnParametersSetAsync()
@@ -46,6 +47,7 @@ public partial class Puzzles: ComponentBase
         Star1Ms = -1;
         Star2Ms = -1;
         SourceLink = string.Format(BaseUrlSource, Year, ActiveDay);
+        PuzzleLink = string.Format(BaseUrlPuzzle, Year, int.Parse(ActiveDay));
         return Task.CompletedTask;
     }
     protected async Task RunStar1()
