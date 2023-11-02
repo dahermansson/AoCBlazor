@@ -26,7 +26,7 @@
     "symbols": {
       "DefaultNamespace": {
         "type": "bind",
-        "binding": "msbuild:RootNamespace + '.' + TargetDirRelativeToProject.Replace(PathSeparatorChar, '.')",
+        "binding": "msbuild:RootNamespace",
         "replaces": "Company.ClassLibrary1"
       }
     },
