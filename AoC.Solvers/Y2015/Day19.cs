@@ -39,38 +39,84 @@ public class Day19: IDay
         var molecule = Input.Last();
         var targetMolecule = "e";
         var replacements = Input.TakeWhile(t => !string.IsNullOrEmpty(t)).Select(t => Parse(t)).OrderByDescending( t=> t.With.Length).ToList();
+        
+        var reduceFunctions = replacements.Where(t => t.With.Contains("Rn") && t.With.EndsWith("Ar")).Select(t => 
+            (FuncMolecule: t.With.Substring(0, t.With.IndexOf("Rn")), With: t.With, Replace: t.Replace)).ToList();
+        var funcBreakingMolecules = replacements.Where(t => !t.With.Contains("Rn") && 
+            reduceFunctions.Any(f => t.With.EndsWith(f.FuncMolecule))).ToList();
+        var reduceMoleculs = replacements.Where(t => !funcBreakingMolecules.Any(f => f.With == t.With) && !reduceFunctions.Any(r => r.With == t.With)).ToList();
+        
+        var run = ReducRun.ReduceFuncs;
         var steps = 0;
         while(molecule != targetMolecule)
         {
             var savedMolecule = molecule;
-            foreach (var replace in replacements)
-            {
-                if(replace.Replace == "e" && molecule != replace.With)
-                    continue;
-                if(molecule.Any(t => char.IsLower(t)) && !replace.With.Any(t => char.IsLower(t)))
-                    continue;
-                
-
-                var i = -1;
-                while( (i = molecule.IndexOf(replace.With)) > -1)
+            if(run == ReducRun.ReduceFuncs)
+                foreach (var replace in reduceFunctions)
                 {
-                    if(i != -1)
+                    var i = -1;
+                    while( (i = molecule.IndexOf(replace.With)) > -1)
                     {
-                        molecule = molecule.Remove(i, replace.With.Length);
-                        molecule = molecule.Insert(i, replace.Replace);
-                        steps++;       
+                        if(i != -1)
+                        {
+                            molecule = molecule.Remove(i, replace.With.Length);
+                            molecule = molecule.Insert(i, replace.Replace);
+                            steps++;       
+                        }
                     }
                 }
-            }
+            else if(run == ReducRun.ReduceMoleculs)
+                foreach (var replace in reduceMoleculs)
+                {
+                    if(replace.Replace == "e" && molecule != replace.With)
+                        continue;
+                    var i = -1;
+                    while( (i = molecule.IndexOf(replace.With)) > -1)
+                    {
+                        if(i != -1)
+                        {
+                            molecule = molecule.Remove(i, replace.With.Length);
+                            molecule = molecule.Insert(i, replace.Replace);
+                            steps++;       
+                        }
+                    }
+                }
+            else
+                foreach (var replace in funcBreakingMolecules)
+                {
+                    var i = -1;
+                    while( (i = molecule.IndexOf(replace.With)) > -1)
+                    {
+                        if(i != -1)
+                        {
+                            molecule = molecule.Remove(i, replace.With.Length);
+                            molecule = molecule.Insert(i, replace.Replace);
+                            steps++;       
+                        }
+                    }
+                }
+
             if(molecule == savedMolecule)
             {
-                steps = 0;
-                replacements = replacements.OrderBy(t => Guid.NewGuid()).ToList();
-                molecule = Input.Last();
+                if(run == ReducRun.ReduceFuncs)
+                    run = ReducRun.ReduceMoleculs;
+                else if(run == ReducRun.ReduceMoleculs && reduceFunctions.Any(t => molecule.Contains(t.With)))
+                    run = ReducRun.ReduceFuncs;
+                else if(run == ReducRun.ReduceMoleculs)
+                    run = ReducRun.FuncBreakingMolecules;
+                else
+                    run = ReducRun.ReduceFuncs;
+                Console.WriteLine(molecule);
             }
         }
-
         return steps;
+    }
+
+    enum ReducRun
+    {
+        ReduceFuncs,
+        FuncBreakingMolecules,
+        ReduceMoleculs
     }
 
     private record Replacement(string Replace, string With);
