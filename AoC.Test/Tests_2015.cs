@@ -509,4 +509,14 @@ public class Tests_2015
         _ = actor.Star2();
         Assert.Equal(res, actor.Output);
     }
+    
+    [InlineData("To continue, please consult the code grid in the manual.  Enter the code at row 6, column 6.", 
+    "27995004")]
+    [Theory]
+    public void Day25_Star1(string input, string res)
+    {
+        var actor = new Day25(input);
+        _ = actor.Star1();
+        Assert.Equal(res, actor.Output);
+    }
 }
