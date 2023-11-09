@@ -145,5 +145,6 @@ namespace AoC.Utils
         }
 
         public static int ExtraxtInteger(this string s) => int.Parse(Regex.Match(s, @"-?\d+").Value);
+        public static int ExtraxtPositivInteger(this string s) => int.Parse(Regex.Match(s, @"\d+").Value);
     }
 }
