@@ -39,4 +39,56 @@ public class Tests_2016
         _ = actor.Star2();
         Assert.Equal(res, actor.Output);
     }
+
+    [InlineData("""
+    eedadn
+    drvtee
+    eandsr
+    raavrd
+    atevrs
+    tsrnev
+    sdttsa
+    rasrtv
+    nssdts
+    ntnada
+    svetve
+    tesnvt
+    vntsnd
+    vrdear
+    dvrsen
+    enarar
+    """, "easter")]
+    [Theory]
+    public void Day6_Star1(string input, string res)
+    {
+        var actor = new Day06(input);
+        _ = actor.Star1();
+        Assert.Equal(res, actor.Output);
+    }
+
+    [InlineData("""
+    eedadn
+    drvtee
+    eandsr
+    raavrd
+    atevrs
+    tsrnev
+    sdttsa
+    rasrtv
+    nssdts
+    ntnada
+    svetve
+    tesnvt
+    vntsnd
+    vrdear
+    dvrsen
+    enarar
+    """, "advent")]
+    [Theory]
+    public void Day6_Star2(string input, string res)
+    {
+        var actor = new Day06(input);
+        _ = actor.Star2();
+        Assert.Equal(res, actor.Output);
+    }
 }
