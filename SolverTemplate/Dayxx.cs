@@ -4,10 +4,7 @@ namespace Company.ClassLibrary1;
 
 public class Dayxx: IDay
 {
-    public Dayxx(string input)
-    {
-        Input = input;
-    }
+    public Dayxx(string input) => Input = input;
     public string Output => throw new NotImplementedException();
 
     private string Input {get; set;}
