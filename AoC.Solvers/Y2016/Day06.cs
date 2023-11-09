@@ -6,7 +6,7 @@ public class Day06: IDay
 {
     public Day06(string input) => Input = InputParsers.GetInputLines(input);
     public string Output => output;
-    private string output { get; set; } = string.Empty;
+    private string output = string.Empty;
     private string[] Input {get; set;}
 
     public int Star1()
