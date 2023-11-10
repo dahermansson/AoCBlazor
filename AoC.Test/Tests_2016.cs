@@ -91,4 +91,31 @@ public class Tests_2016
         _ = actor.Star2();
         Assert.Equal(res, actor.Output);
     }
+
+    [InlineData("""
+    abba[mnop]qrst
+    abcd[bddb]xyyx
+    aaaa[qwer]tyui
+    ioxxoj[asdfgh]zxcvbn
+    """, 2)]
+    [Theory]
+    public void Day7_Star1(string input, int res)
+    {
+        var actor = new Day07(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+    aba[bab]xyz
+    xyx[xyx]xyx
+    aaa[kek]eke
+    zazbz[bzb]cdb
+    """, 3)]
+    [Theory]
+    public void Day7_Star2(string input, int res)
+    {
+        var actor = new Day07(input);
+        Assert.Equal(res, actor.Star2());
+    }
+
 }
