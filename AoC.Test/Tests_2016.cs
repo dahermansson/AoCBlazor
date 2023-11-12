@@ -1,5 +1,6 @@
 namespace AoC.Test;
 
+using System.Text;
 using AoC.Solvers.Y2016;
 public class Tests_2016
 {
@@ -116,6 +117,36 @@ public class Tests_2016
     {
         var actor = new Day07(input);
         Assert.Equal(res, actor.Star2());
+    }
+
+    [InlineData("""
+    rect 1x1
+    """, 1)]
+    [Theory]
+    public void Day8_Star1(string input, int res)
+    {
+        var actor = new Day08(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+    rect 1x1
+    """)]
+    [Theory]
+    public void Day8_Star2(string input)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine();
+        sb.Append("#");
+        sb.AppendLine(new string('.', 49));
+        sb.AppendLine(new string('.', 50));
+        sb.AppendLine(new string('.', 50));
+        sb.AppendLine(new string('.', 50));
+        sb.AppendLine(new string('.', 50));
+        sb.AppendLine(new string('.', 50));
+        var actor = new Day08(input);
+        _ = actor.Star2();
+        Assert.Equal(sb.ToString(), actor.Output);
     }
 
 }
