@@ -219,8 +219,8 @@ public class Tests_2015
         Assert.Equal(res, actor.Output);
     }
     [InlineData("[1,2,3]", 6)]
-    [InlineData("{\"a\":2,\"b\":4}", 6)]
-    [InlineData("{\"a\":[-1,1]}", 0)]
+    [InlineData(@"{""a"":2,""b"":4}", 6)]
+    [InlineData(@"{""a"":[-1,1]}", 0)]
     [Theory]
     public void Day12_Star1(string input, int res)
     {

@@ -15,8 +15,8 @@ public class Day12: IDay
     private string Input {get; set;}
 
     //public int Star1() => Regex.Matches(Input, "-?\\d+").Sum(t => int.Parse(t.Value));
-    public int Star1() => TraverseJson(JsonNode.Parse(Input)!.AsObject(), false);
-    public int Star2() => TraverseJson(JsonNode.Parse(Input)!.AsObject(), true);
+    public int Star1() => TraverseJson(JsonArray.Parse(Input) ?? JsonObject.Parse(Input), false);
+    public int Star2() => TraverseJson(JsonArray.Parse(Input) ?? JsonObject.Parse(Input), true);
     
     private int TraverseJson(JsonNode o, bool removeRed)
     {
