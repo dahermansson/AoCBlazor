@@ -126,7 +126,7 @@ namespace AoC.Utils
             return res.ToString();
         }
 
-        public MatrixPoint<T> FindFirst(T item) => GetAllPositions().FirstOrDefault(t => t.Value.Equals(item));
+        public MatrixPoint<T> FindFirst(T item) => GetAllPositions().First(t => t.Value!.Equals(item));
         
 
         public string GetPrintable()

@@ -15,9 +15,16 @@ public class Day12: IDay
     private string Input {get; set;}
 
     //public int Star1() => Regex.Matches(Input, "-?\\d+").Sum(t => int.Parse(t.Value));
-    public int Star1() => TraverseJson(JsonArray.Parse(Input) ?? JsonObject.Parse(Input), false);
-    public int Star2() => TraverseJson(JsonArray.Parse(Input) ?? JsonObject.Parse(Input), true);
-    
+    public int Star1()
+    {
+        var json = JsonArray.Parse(Input) ?? JsonObject.Parse(Input) ?? throw new FormatException("Input is not Json-format");
+        return TraverseJson(json, false);
+    }
+    public int Star2()
+    {
+        var json = JsonArray.Parse(Input) ?? JsonObject.Parse(Input) ?? throw new FormatException("Input is not Json-format");
+        return TraverseJson(json, true);
+    }
     private int TraverseJson(JsonNode o, bool removeRed)
     {
         int value = 0;
