@@ -7,6 +7,7 @@ public static class SolversManager
 {
     public const int Y2016 = 2016;
     public const int Y2015 = 2015;
+    public const int Y2023 = 2023;
     public static List<string> GetDays(int year)
     {
         var theList = Assembly.GetExecutingAssembly().GetTypes()
