@@ -1,0 +1,108 @@
+﻿using AoC.Utils;
+
+namespace AoC.Solvers.Y2016;
+
+public class Day10: IDay
+{
+    public Day10(string input) => Input = InputParsers.GetInputLines(input);
+    public string Output => throw new NotImplementedException();
+
+    private string[] Input {get; set;}
+    Dictionary<int, Bot> Bots = new ();
+    Dictionary<int, int> Bins = new ();
+    private int Star1Value = 0;
+
+    public int Star1()
+    {
+        SetUpBots();
+        RunBots();
+        return Star1Value;
+    }
+
+    public int Star2()
+    {
+        SetUpBots();
+        RunBots();
+        return Bins[0]*Bins[1]*Bins[2];
+    }
+
+    private void RunBots()
+    {
+        while(Bots.Any(t => t.Value.HasTwo))
+        {
+            foreach (var botsReadyForAction in Bots.Where(t => t.Value.HasTwo).ToList())
+            {
+                if(botsReadyForAction.Value.LowBot > -1)
+                    Bots[botsReadyForAction.Value.LowBot].Add(botsReadyForAction.Value.GetLow());
+                else
+                    Bins[botsReadyForAction.Value.LowBin] = botsReadyForAction.Value.GetLow();
+                if(botsReadyForAction.Value.HighBot > -1)
+                    Bots[botsReadyForAction.Value.HighBot].Add(botsReadyForAction.Value.GetHigh());
+                else
+                    Bins[botsReadyForAction.Value.HighBin] = botsReadyForAction.Value.GetHigh();
+                botsReadyForAction.Value.Microchip.Clear();
+                var b = Bots.SingleOrDefault(t => t.Value.Microchip.FirstOrDefault().Key == 17 && t.Value.Microchip.LastOrDefault().Key == 61).Value;
+                if( b != null)
+                    Star1Value = b.Id;
+            }
+        }
+    }
+    private void SetUpBots()
+    {
+        Bots.Clear();
+        Bins.Clear();
+        foreach(string row in Input)
+        {
+            var splits = row.Split(" ");
+            if(splits[0] == "value")
+            {
+                var bot = int.Parse(splits.Last());
+                if(!Bots.ContainsKey(bot))
+                    Bots[bot] = new Bot(bot);
+                Bots[bot].Add(int.Parse(splits[1]));
+            }
+            else
+            {
+                var bot = int.Parse(splits[1]);
+                if(!Bots.ContainsKey(bot))
+                    Bots[bot] = new Bot(bot);
+                var low = int.Parse(splits[6]);
+                var high = int.Parse(splits.Last());
+                if(splits[5] == "bot")
+                    Bots[bot].LowBot = low;
+                else
+                    Bots[bot].LowBin = low;
+                if(splits[10] == "bot")
+                    Bots[bot].HighBot = high;
+                else
+                    Bots[bot].HighBin = high;
+            }
+        }
+    }
+}
+
+public class Bot
+{
+    public Bot(int id)
+    {
+        Id = id;
+    }
+    public Bot(int id, int highBot = -1, int lowBot = -1, int highBin = -1, int lowBin = -1)
+    {
+        Id = id;
+        HighBin = highBin;
+        HighBot = highBot;
+        LowBin = lowBin;
+        LowBot = lowBot;
+    }
+    public int Id { get; set; }
+    public int HighBot { get; set; } = -1;
+    public int LowBot { get; set; } = -1;
+    public int HighBin { get; set; } = -1;
+    public int LowBin { get; set; } = -1;
+    public SortedList<int, int> Microchip  { get; set; } = new ();
+    public void Add(int i) => Microchip.Add(i, i);
+    public bool HasTwo => Microchip.Count == 2;
+    public int GetLow() => Microchip.First().Value;
+    public int GetHigh() => Microchip.Last().Value;
+}
