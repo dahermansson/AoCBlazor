@@ -1,4 +1,4 @@
-value 61 goes to bot 209
+﻿value 61 goes to bot 209
 bot 200 gives low to bot 40 and high to bot 141
 bot 197 gives low to bot 202 and high to bot 65
 bot 19 gives low to bot 170 and high to bot 120
