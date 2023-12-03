@@ -61,6 +61,41 @@ public class Tests_2023
         Assert.Equal(res, actor.Star2());
     }
 
+    [InlineData("""
+    467..114..
+    ...*......
+    ..35..633.
+    ......#...
+    617*......
+    .....+.58.
+    ..592.....
+    ......755.
+    ...$.*....
+    .664.598..
+    """, 4361)]
+    [Theory]
+    public void Day3_Star1(string input, int res)
+    {
+        var actor = new Day03(input);
+        Assert.Equal(res, actor.Star1());
+    }
 
-
+    [InlineData("""
+    467..114..
+    ...*......
+    ..35..633.
+    ......#...
+    617*......
+    .....+.58.
+    ..592.....
+    ......755.
+    ...$.*....
+    .664.598..
+    """, 467835)]
+    [Theory]
+    public void Day3_Star2(string input, int res)
+    {
+        var actor = new Day03(input);
+        Assert.Equal(res, actor.Star2());
+    }
 }
