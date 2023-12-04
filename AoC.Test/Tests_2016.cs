@@ -173,4 +173,11 @@ public class Tests_2016
         Assert.Equal(res, actor.Output);
     }
 
+    [InlineData("10 7 4", 11)]
+    [Theory]
+    public void Day13_Star1(string input, int res)
+    {
+        var actor = new Day13(input);
+        Assert.Equal(res, actor.Star1());
+    }
 }

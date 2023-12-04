@@ -17,6 +17,7 @@ namespace AoC.Utils
         public static readonly string DNL = $"{NL}{NL}";
         public static int ManhattanDistance(int x, int y) => Math.Abs(x) + Math.Abs(y);
         public static int ManhattanDistance(Point x, Point y) => Math.Abs(x.X - y.X) + Math.Abs(x.Y - y.Y);
+        public static int ManhattanDistance(int x1, int x2, int y1, int y2) => Math.Abs(x1 - y1) + Math.Abs(x2 - y2);
         public static long LCM(long a, long b) => (a / GCD(a, b)) * b;
         public static long GCD(long a, long b)
         {
