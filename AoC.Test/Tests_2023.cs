@@ -215,4 +215,25 @@ public class Tests_2023
         _ = actor.Star2();
         Assert.Equal(res, actor.Output);
     }
+    [InlineData("""
+    Time:      7  15   30
+    Distance:  9  40  200
+    """, 288)]
+    [Theory]
+    public void Day6_Star1(string input, int res)
+    {
+        var actor = new Day06(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+    Time:      7  15   30
+    Distance:  9  40  200
+    """, 71503)]
+    [Theory]
+    public void Day6_Star2(string input, int res)
+    {
+        var actor = new Day06(input);
+        Assert.Equal(res, actor.Star2());
+    }
 }
