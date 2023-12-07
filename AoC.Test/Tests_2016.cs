@@ -196,4 +196,15 @@ public class Tests_2016
         var actor = new Day14(input);
         Assert.Equal(res, actor.Star2());
     }
+
+    [InlineData("""
+    Disc #1 has 5 positions; at time=0, it is at position 4.
+    Disc #2 has 2 positions; at time=0, it is at position 1.
+    """, 5)]
+    [Theory]
+    public void Day15_Star1(string input, int res)
+    {
+        var actor = new Day15(input);
+        Assert.Equal(res, actor.Star1());
+    }
 }
