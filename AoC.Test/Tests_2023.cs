@@ -236,4 +236,31 @@ public class Tests_2023
         var actor = new Day06(input);
         Assert.Equal(res, actor.Star2());
     }
+    [InlineData("""
+    32T3K 765
+    T55J5 684
+    KK677 28
+    KTJJT 220
+    QQQJA 483
+    """, 6440)]
+    [Theory]
+    public void Day7_Star1(string input, int res)
+    {
+        var actor = new Day07(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+    32T3K 765
+    T55J5 684
+    KK677 28
+    KTJJT 220
+    QQQJA 483
+    """, 5905)]
+    [Theory]
+    public void Day7_Star2(string input, int res)
+    {
+        var actor = new Day07(input);
+        Assert.Equal(res, actor.Star2());
+    }
 }
