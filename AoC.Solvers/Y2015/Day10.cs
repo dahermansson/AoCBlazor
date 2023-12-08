@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Text;
-using AoC.Utils;
+using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2015;
 

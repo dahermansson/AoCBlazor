@@ -1,4 +1,4 @@
-namespace AoC.Utils;
+namespace AoC.AoCUtils;
 
 public class TreeNode<T> where T: notnull
 {

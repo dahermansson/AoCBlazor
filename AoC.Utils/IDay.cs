@@ -1,4 +1,4 @@
-namespace AoC.Utils;
+namespace AoC.AoCUtils;
 
 public interface IDay
 {

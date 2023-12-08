@@ -1,4 +1,4 @@
-﻿using AoC.Utils;
+﻿using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2023;
 
@@ -20,7 +20,7 @@ public class Day08: IDay
     {
         long lcm = 1;
         foreach (var doc in Docs.Where(t => t.Key.EndsWith('A')).Select(t => t.Key))
-            lcm = Utils.Utils.LCM(lcm, GetSteps(doc, "Z"));
+            lcm = AoCUtils.Utils.LCM(lcm, GetSteps(doc, "Z"));
         output = lcm.ToString();
         return -1;
     }

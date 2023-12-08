@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using AoC.Utils;
+using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2015;
 

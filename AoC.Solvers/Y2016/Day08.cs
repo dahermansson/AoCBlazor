@@ -1,4 +1,4 @@
-﻿using AoC.Utils;
+﻿using AoC.AoCUtils;
 using Microsoft.Toolkit.HighPerformance;
 
 namespace AoC.Solvers.Y2016;

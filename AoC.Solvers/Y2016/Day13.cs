@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using AoC.Utils;
+using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2016;
 
@@ -48,7 +48,7 @@ public class Day13: IDay
                 else
                 {
                     var fromStart = current.dist + 1;
-                    var toGoal = Utils.Utils.ManhattanDistance(next.X, next.Y, Goal.X, Goal.Y);
+                    var toGoal = AoCUtils.Utils.ManhattanDistance(next.X, next.Y, Goal.X, Goal.Y);
                     var dist = fromStart + toGoal;
                     if(toVisit.Any(t => t.pos == next && t.dist < dist))
                         continue;

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Components;
-using AoC.Utils;
+using AoC.AoCUtils;
 using System.Diagnostics;
 using AoC.Solvers;
 using Microsoft.AspNetCore.Mvc;

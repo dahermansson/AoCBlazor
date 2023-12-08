@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
-namespace AoC.Utils
+namespace AoC.AoCUtils
 {
     public static class ImageHandler
     {

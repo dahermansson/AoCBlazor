@@ -1,4 +1,4 @@
-﻿using AoC.Utils;
+﻿using AoC.AoCUtils;
 using System.Security.Cryptography;
 using System.Text;
 

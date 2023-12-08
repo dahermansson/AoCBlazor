@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace AoC.Utils
+namespace AoC.AoCUtils
 {
     public static class InputReader
     {

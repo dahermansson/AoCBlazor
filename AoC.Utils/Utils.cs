@@ -1,13 +1,10 @@
-using System.Linq;
-using System;
-using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Toolkit.HighPerformance;
 
 
-namespace AoC.Utils
+namespace AoC.AoCUtils
 {
     public static class Utils
     {
@@ -95,12 +92,23 @@ namespace AoC.Utils
 
         public static string Print(this BitArray bits)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             for (int i = 0; i < bits.Length; i++)
-            {
                 sb.Append(bits[i] ? 1 : 0);
-            }
             return sb.ToString();
+        }
+
+        public static void Reverse(this BitArray array)
+        {
+            int length = array.Length;
+            int mid = length / 2;
+
+            for (int i = 0; i < mid; i++)
+            {
+                bool bit = array[i];
+                array[i] = array[length - i - 1];
+                array[length - i - 1] = bit;
+            }    
         }
 
         public static IEnumerable<IEnumerable<T>> Permutations<T>(this IEnumerable<T> source)
