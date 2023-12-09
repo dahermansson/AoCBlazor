@@ -298,4 +298,28 @@ public class Tests_2023
         _ = actor.Star2();
         Assert.Equal(res, actor.Output);
     }
+
+    [InlineData("""
+    0 3 6 9 12 15
+    1 3 6 10 15 21
+    10 13 16 21 30 45
+    """, 114)]
+    [Theory]
+    public void Day9_Star1(string input, int res)
+    {
+        var actor = new Day09(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+    0 3 6 9 12 15
+    1 3 6 10 15 21
+    10 13 16 21 30 45
+    """, 2)]
+    [Theory]
+    public void Day9_Star2(string input, int res)
+    {
+        var actor = new Day09(input);
+        Assert.Equal(actor.Star2(), res);
+    }
 }
