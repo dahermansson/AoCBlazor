@@ -7,8 +7,8 @@ public class Day09 : IDay
         .Select(i => int.Parse(i, System.Globalization.NumberStyles.AllowLeadingSign)).ToArray()).ToList();
     public string Output => throw new NotImplementedException();
     private List<int[]> Input { get; set; }
-    public int Star1() => Input.Sum(t => Extrapolate(Predict(t.ToArray()).Select(t => t.Last()).ToArray()).Last());
-    public int Star2() => Input.Sum(t => ExtrapolateBack(Predict(t.ToArray()).Select(t => t.First()).ToArray()).Last());
+    public int Star1() => Input.Sum(t => Extrapolate(Predict([..t]).Select(t => t.Last()).ToArray()).Last());
+    public int Star2() => Input.Sum(t => ExtrapolateBack(Predict([..t]).Select(t => t.First()).ToArray()).Last());
 
     private IEnumerable<int[]> Predict(int[] dataset)
     {
