@@ -1,5 +1,4 @@
 ﻿using System.Security.Cryptography;
-using NetTopologySuite.Geometries;
 
 namespace AoC.Solvers.Y2016;
 
