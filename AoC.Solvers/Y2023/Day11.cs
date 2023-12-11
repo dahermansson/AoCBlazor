@@ -3,9 +3,16 @@
 public class Day11: IDay
 {
     public Day11(string input) => Input = InputParsers.GetInputLines(input);
+    
+    public Day11(string input, int expand)
+    {
+        Input = InputParsers.GetInputLines(input);
+        Expand = expand;
+    }
     public string Output => output;
     private string output = default!;
     private string[] Input {get; set;}
+    private int Expand { get; set; } = -1;
 
     public int Star1()
     {
@@ -15,7 +22,7 @@ public class Day11: IDay
 
     public int Star2()
     {
-        Analyse(1000000);
+        Analyse(Expand == -1 ? 1000000 : Expand);
         return -1;
     }
 
