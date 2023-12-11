@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\AoC.Utils\AoC.Utils.csproj" />
+    <ProjectReference Include="..\AoC.AoCUtils\AoC.AoCUtils.csproj" />
     <ProjectReference Include="..\AoC.Solvers\AoC.Solvers.csproj" />
   </ItemGroup>
 
