@@ -9,16 +9,7 @@ public class Day14: IDay
 
     private List<string> Input {get; set;}
 
-    public int Star1()
-    {
-        var columns = GetColumns(Input);
-        var tilted = new List<string>();
-        foreach (var column in columns)
-        {
-            tilted.Add(Tilt(column, false));
-        }
-        return tilted.Sum(c => c.IndexOfMany(k => k == 'O').Select(i => c.Length - i).Sum());
-    }
+    public int Star1() => Tilt(GetColumns(Input), false).Sum(c => c.IndexOfMany(k => k == 'O').Select(i => c.Length - i).Sum());
 
     public int Star2()
     {
@@ -29,22 +20,17 @@ public class Day14: IDay
         for (int i = 1; i < cyclesToRun; i++)
         {        
             t = Cycle(t);
-            
             var cycle = string.Concat(t);
-            if(cycles.ContainsKey(cycle))
+            if(cycles.TryGetValue(cycle, out int cycleStart))
             {
-                var cycleStart = cycles[cycle];
                 var cycleLength = i - cycleStart;
                 cyclesRemaning = (cyclesToRun - cycleStart) % cycleLength;
                 break;
             }
             cycles.Add(string.Concat(t), i);
-            
         }
         for (int i = 0; i < cyclesRemaning; i++)
-        {        
             t = Cycle(t);
-        }
         
         return GetColumns(t).Sum(c => c.IndexOfMany(k => k == 'O').Select(i => c.Length - i).Sum());
     }
@@ -70,28 +56,17 @@ public class Day14: IDay
         var south = GetColumns(tilted);
         tilted = Tilt(south, true);
         var east = GetColumns(tilted);
-        tilted = Tilt(east, true);
-        
-        return tilted;
+        return Tilt(east, true);
     }
 
-    private static List<string> Tilt(List<string> str, bool reverse)
-    {
-        var res = new List<string>();
-        foreach (var s in str)
-        {
-            res.Add(Tilt(s, reverse));
-        }
-        return res;
-    }
+    private static List<string> Tilt(List<string> str, bool reverse) => str.Select(t => Tilt(t, reverse)).ToList();
+    
     private static string Tilt(string str, bool reverse)
     {
         var s = str.Split("#");
         var parts = new List<String>();
         foreach (var i in s)
             parts.Add(string.Join("", reverse ? i.OrderBy(t => t) : i.OrderByDescending(t => t)));
-
         return string.Join('#', parts);
     }
-
 }
