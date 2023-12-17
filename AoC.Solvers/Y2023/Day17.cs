@@ -56,7 +56,7 @@ public class Day17 : IDay
                 //Test case works with DirBlockCount >= 3 and Input gives 1144 (wrong answer)
                 //if (current.Row == goalX && current.Col == goalY && current.DirBlockCount >= 3)
                 
-                //Only DirBlockCount == 5 gives correct answer. 
+                //Only DirBlockCount == 4 gives correct answer. 
                 //Both DirBlocCount >= 3 and DirBlockCount >= 4 gives 1144
                 //The test case dont work with DirBlockCount == 4
                 if (current.Row == goalX && current.Col == goalY && current.DirBlockCount == 4)
