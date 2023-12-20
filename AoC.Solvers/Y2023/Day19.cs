@@ -12,12 +12,12 @@ public class Day19(string input) : IDay
         bool workflows = true;
         foreach (var s in Input)
         {
-            if(s == string.Empty)
+            if (s == string.Empty)
             {
                 workflows = false;
                 continue;
             }
-            if(workflows)
+            if (workflows)
                 Workflows.Add(s[..s.IndexOf('{')], new WorkFlow(s));
             else
                 Parts.Add(new Part(s));
@@ -37,45 +37,81 @@ public class Day19(string input) : IDay
 
     public int Star2()
     {
-        return CalcRanges().Count();
+        var ranges = CalcRanges();
+        
+        Console.WriteLine(ranges);
+        return 0;
     }
 
-    private IEnumerable<Ranges> CalcRanges()
+    private long CalcRanges()
     {
-        var q = new Queue<(string wf, Ranges R)>();
-        q.Enqueue(("in", new Ranges()));
-
-        while(q.Count > 0)
+        var q = new Queue<(string wf, Dictionary<int, Range> Ranges)>();
+        q.Enqueue(("in", new(){
+                {0, new Range(1,4000)},
+                {1, new Range(1, 4000)},
+                {2, new Range(1, 4000)},
+                {3, new Range(1, 4000)},
+            }));
+        long total = 0;
+        while (q.Count > 0)
         {
             var wf = q.Dequeue();
-            if(wf.wf == "A")
-                yield return wf.R;
-            if(wf.wf == "R")
-                yield return wf.R;
-            var current = Workflows[wf.wf];
             
+            var current = Workflows[wf.wf];
+
             foreach (var rule in current.Rules)
             {
-                if(rule.Next == "A")
+                if (rule.Next == "A")
                 {
-                    yield return wf.R;
+                    var res = 1;
+                    foreach (var range in wf.Ranges.Values)
+                    {
+                        res *= range.Max - range.Min - 1;
+                    }
+                    total += res;
                     continue;
                 }
-                if(rule.Next == "R")
-                {
-                    yield return wf.R;
+                if (rule.Next == "R")
                     continue;
+                if(rule.Type == RuleType.GreaterThen || rule.Type == RuleType.SmallerThen)
+                {
+                    var ranges = CreateRanges(wf.Ranges[rule.Value], rule);
+
+                    if(ranges.t.Min <= ranges.t.Max)
+                    {
+                        var newRanges = new Dictionary<int, Range>(wf.Ranges);
+                        newRanges[rule.Value] = ranges.t;
+                        q.Enqueue((rule.Next, newRanges));
+                    }
+                    else
+                    {
+                        wf.Ranges[rule.Value] = ranges.f;
+                    }
                 }
-                q.Enqueue((rule.Next, wf.R));
+                else
+                {
+                    q.Enqueue((rule.Next, new (wf.Ranges)));
+                }
             }
         }
+        return total;
     }
 
-    private static Ranges CreateRange(Ranges ranges, Rule rule)
+    private static (Range t, Range f) CreateRanges(Range range, Rule rule)
     {
-        return null;
-        //var range = ranges.R[rule.Value]
-        //return ;
+        Range @true;
+        Range @false;
+        if(rule.Type == RuleType.GreaterThen)
+        {
+            @true = new Range(rule.I + 1, range.Max);
+            @false = new Range(range.Min, rule.I);
+        }
+        else
+        {
+            @true = new Range(range.Min, rule.I-1);
+            @false = new Range(rule.I, range.Max);
+        }
+        return (@true, @false);
     }
 
     private static readonly Dictionary<char, int> ValueLut = new(){
@@ -87,14 +123,14 @@ public class Day19(string input) : IDay
 
     class Ranges
     {
-        public Dictionary<int, List<Range>> R { get; set; }
+        public Dictionary<int, Range> R { get; set; }
         public Ranges()
         {
             R = new(){
-                {0, new List<Range>()},
-                {1, new List<Range>()},
-                {2, new List<Range>()},
-                {3, new List<Range>()},
+                {0, new Range(1,4000)},
+                {1, new Range(1, 4000)},
+                {2, new Range(1, 4000)},
+                {3, new Range(1, 4000)},
             };
         }
     }
@@ -106,7 +142,8 @@ public class Day19(string input) : IDay
         GreaterThen,
         SmallerThen,
         Accept,
-        Reject
+        Reject,
+        Or
     }
 
     //in{s<1351:px,qqz}
@@ -129,7 +166,10 @@ public class Day19(string input) : IDay
                 Next = s.Substring(s.IndexOf(':') + 1);
             }
             else
+            {
                 Next = s;
+                Type = RuleType.Or;
+            }
         }
 
         public int Value { get; set; }
