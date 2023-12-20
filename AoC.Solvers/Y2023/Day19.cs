@@ -22,8 +22,6 @@ public class Day19(string input) : IDay
             else
                 Parts.Add(new Part(s));
         }
-
-
         return Parts.Where(p => RunPart(p)).Sum(p => p.Values.Sum());
     }
 
@@ -39,7 +37,45 @@ public class Day19(string input) : IDay
 
     public int Star2()
     {
-        return 0;
+        return CalcRanges().Count();
+    }
+
+    private IEnumerable<Ranges> CalcRanges()
+    {
+        var q = new Queue<(string wf, Ranges R)>();
+        q.Enqueue(("in", new Ranges()));
+
+        while(q.Count > 0)
+        {
+            var wf = q.Dequeue();
+            if(wf.wf == "A")
+                yield return wf.R;
+            if(wf.wf == "R")
+                yield return wf.R;
+            var current = Workflows[wf.wf];
+            
+            foreach (var rule in current.Rules)
+            {
+                if(rule.Next == "A")
+                {
+                    yield return wf.R;
+                    continue;
+                }
+                if(rule.Next == "R")
+                {
+                    yield return wf.R;
+                    continue;
+                }
+                q.Enqueue((rule.Next, wf.R));
+            }
+        }
+    }
+
+    private static Ranges CreateRange(Ranges ranges, Rule rule)
+    {
+        return null;
+        //var range = ranges.R[rule.Value]
+        //return ;
     }
 
     private static readonly Dictionary<char, int> ValueLut = new(){
@@ -48,6 +84,22 @@ public class Day19(string input) : IDay
         {'a', 2},
         {'s', 3},
     };
+
+    class Ranges
+    {
+        public Dictionary<int, List<Range>> R { get; set; }
+        public Ranges()
+        {
+            R = new(){
+                {0, new List<Range>()},
+                {1, new List<Range>()},
+                {2, new List<Range>()},
+                {3, new List<Range>()},
+            };
+        }
+    }
+
+    record Range(int Min, int Max);
 
     enum RuleType
     {
