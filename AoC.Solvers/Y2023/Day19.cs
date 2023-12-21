@@ -2,8 +2,8 @@
 
 public class Day19(string input) : IDay
 {
-    public string Output => throw new NotImplementedException();
-
+    public string Output => output;
+    private string output { get; set; } = default!;
     private string[] Input { get; set; } = InputParsers.GetInputLines(input);
     private Dictionary<string, WorkFlow> Workflows = [];
     private List<Part> Parts = [];
@@ -24,7 +24,6 @@ public class Day19(string input) : IDay
         }
         return Parts.Where(p => RunPart(p)).Sum(p => p.Values.Sum());
     }
-
     private bool RunPart(Part part)
     {
         var next = "in";
@@ -32,22 +31,18 @@ public class Day19(string input) : IDay
             next = Workflows[next].Run(part);
         return next == "A";
     }
-
-
-
-    public int Star2()
+    public int Star2() 
     {
-        var ranges = CalcRanges();
         
-        Console.WriteLine(ranges);
-        return 0;
+        output = CalcRanges().ToString();
+        return -1;
     }
-
+        
     private long CalcRanges()
     {
         var q = new Queue<(string wf, Dictionary<int, Range> Ranges)>();
         q.Enqueue(("in", new(){
-                {0, new Range(1,4000)},
+                {0, new Range(1, 4000)},
                 {1, new Range(1, 4000)},
                 {2, new Range(1, 4000)},
                 {3, new Range(1, 4000)},
@@ -56,43 +51,31 @@ public class Day19(string input) : IDay
         while (q.Count > 0)
         {
             var wf = q.Dequeue();
-            
-            var current = Workflows[wf.wf];
-
-            foreach (var rule in current.Rules)
-            {
-                if (rule.Next == "A")
+            if (wf.wf == "A")
                 {
-                    var res = 1;
+                    long res = 1;
                     foreach (var range in wf.Ranges.Values)
-                    {
-                        res *= range.Max - range.Min - 1;
-                    }
+                        res *= range.Max - (range.Min - 1);
                     total += res;
                     continue;
                 }
-                if (rule.Next == "R")
+                if (wf.wf == "R")
                     continue;
+
+            var current = Workflows[wf.wf];
+            foreach (var rule in current.Rules)
                 if(rule.Type == RuleType.GreaterThen || rule.Type == RuleType.SmallerThen)
                 {
-                    var ranges = CreateRanges(wf.Ranges[rule.Value], rule);
-
-                    if(ranges.t.Min <= ranges.t.Max)
+                    var (t, f) = CreateRanges(wf.Ranges[rule.Xmas], rule);
+                    var newRanges = new Dictionary<int, Range>(wf.Ranges);
                     {
-                        var newRanges = new Dictionary<int, Range>(wf.Ranges);
-                        newRanges[rule.Value] = ranges.t;
+                        newRanges[rule.Xmas] = t;
                         q.Enqueue((rule.Next, newRanges));
                     }
-                    else
-                    {
-                        wf.Ranges[rule.Value] = ranges.f;
-                    }
+                    wf.Ranges[rule.Xmas] = f;
                 }
                 else
-                {
                     q.Enqueue((rule.Next, new (wf.Ranges)));
-                }
-            }
         }
         return total;
     }
@@ -103,13 +86,13 @@ public class Day19(string input) : IDay
         Range @false;
         if(rule.Type == RuleType.GreaterThen)
         {
-            @true = new Range(rule.I + 1, range.Max);
-            @false = new Range(range.Min, rule.I);
+            @true = new Range(rule.Comparer + 1, range.Max);
+            @false = new Range(range.Min, rule.Comparer);
         }
         else
         {
-            @true = new Range(range.Min, rule.I-1);
-            @false = new Range(rule.I, range.Max);
+            @true = new Range(range.Min, rule.Comparer-1);
+            @false = new Range(rule.Comparer, range.Max);
         }
         return (@true, @false);
     }
@@ -139,14 +122,13 @@ public class Day19(string input) : IDay
 
     enum RuleType
     {
-        GreaterThen,
-        SmallerThen,
         Accept,
         Reject,
-        Or
+        GreaterThen,
+        SmallerThen
     }
 
-    //in{s<1351:px,qqz}
+
     class WorkFlow(string s)
     {
         public List<Rule> Rules { get; set; } = s[s.IndexOf('{')..].Trim('{', '}').Split(',').Select(r => new Rule(r)).ToList();
@@ -160,35 +142,29 @@ public class Day19(string input) : IDay
         {
             if (s.Contains(':'))
             {
+
                 Type = s.Contains('>') ? RuleType.GreaterThen : RuleType.SmallerThen;
-                Value = ValueLut[s[0]];
-                I = Utils.ExtraxtInteger(s);
+                Xmas = ValueLut[s[0]];
+                Comparer = Utils.ExtraxtInteger(s);
                 Next = s.Substring(s.IndexOf(':') + 1);
             }
             else
-            {
                 Next = s;
-                Type = RuleType.Or;
-            }
         }
-
-        public int Value { get; set; }
+        public int Xmas { get; set; }
         public RuleType Type { get; set; }
         public string Next { get; set; }
-        public int I { get; set; }
+        public int Comparer { get; set; }
 
         private bool Run(Part p, RuleType rule) => rule switch
         {
-            RuleType.GreaterThen => p.Values[Value] > I,
-            RuleType.SmallerThen => p.Values[Value] < I,
+            RuleType.GreaterThen => p.Values[Xmas] > Comparer,
+            RuleType.SmallerThen => p.Values[Xmas] < Comparer,
             _ => true
         };
 
         public bool Exec(Part part) => Run(part, Type);
     }
-
-
-    //{x=787,m=2655,a=1222,s=2876}
     record Part
     {
         public int X { get; set; }
