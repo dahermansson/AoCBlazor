@@ -4,7 +4,7 @@ public class Day23(string input) : IDay
 {
     public string Output => throw new NotImplementedException();
 
-    private string[] Input { get; set; } = InputParsers.GetInputLines(input);  
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
     public int Star1()
     {
         var start = new Pos(0, 1);
@@ -18,17 +18,17 @@ public class Day23(string input) : IDay
         var junktions = FindJunktions();
         var start = new Pos(0, 1);
         var goal = new Pos(Input.Length - 1, Input[0].Length - 2);
-        
-        Dictionary<Pos, List<(Pos, int)>> graph = CreateGraph([..junktions, start, goal]);
+
+        Dictionary<Pos, List<(Pos, int)>> graph = CreateGraph([.. junktions, start, goal]);
         return HikeGraph(graph, start, goal);
     }
 
     private static int HikeGraph(Dictionary<Pos, List<(Pos, int)>> graph, Pos start, Pos goal)
     {
-        var queue = new Queue<List<(Pos, int)>>();
+        var queue = new Stack<List<(Pos, int)>>();
         int maxLength = 0;
-        queue.Enqueue([(start, 0)]);
-        while (queue.TryDequeue(out var path))
+        queue.Push([(start, 0)]);
+        while (queue.TryPop(out var path))
         {
             var current = path.Last();
             if (current.Item1 == goal)
@@ -38,11 +38,8 @@ public class Day23(string input) : IDay
                 continue;
             }
             foreach (var next in graph[current.Item1])
-            {
-                if (path.Any(t => t.Item1 == next.Item1))
-                    continue;
-                queue.Enqueue([.. path, (next.Item1, current.Item2 + next.Item2 - 1)]);
-            }
+                if (!path.Any(t => t.Item1 == next.Item1))
+                    queue.Push([.. path, (next.Item1, current.Item2 + next.Item2 - 1)]);
         }
         return maxLength;
     }
@@ -50,9 +47,9 @@ public class Day23(string input) : IDay
     private List<List<Pos>> Hike(Pos start, Pos goal, bool star1)
     {
         List<List<Pos>> paths = [];
-        var queue = new Queue<List<Pos>>();
-        queue.Enqueue([start]);
-        while (queue.TryDequeue(out var path))
+        var queue = new Stack<List<Pos>>();
+        queue.Push([start]);
+        while (queue.TryPop(out var path))
         {
             var current = path.Last();
             if (current == goal)
@@ -60,7 +57,7 @@ public class Day23(string input) : IDay
 
             foreach (Pos next in GetNext(current, star1 || current == start))
                 if (!path.Contains(next))
-                    queue.Enqueue([.. path, next]);
+                    queue.Push([.. path, next]);
         }
         return paths;
     }
@@ -102,9 +99,9 @@ public class Day23(string input) : IDay
         var next = Moves.Select(m => new Pos(pos.Row + m.Row, pos.Col + m.Col))
                 .Where(p => p.Row > 0 && p.Row < Input.Length && p.Col > 0 && p.Col < Input[p.Row].Length &&
                  Input[p.Row][p.Col] != '#').ToList();
-            return next.Count >2;
+        return next.Count > 2;
     }
-    
+
     private List<Pos> GetNext(Pos current, bool star1)
     {
         if (star1)
@@ -116,7 +113,7 @@ public class Day23(string input) : IDay
                 var next = Moves.Select(m => new Pos(current.Row + m.Row, current.Col + m.Col))
                 .Where(p => p.Row > 0 && p.Row < Input.Length && p.Col > 0 && p.Col < Input[p.Row].Length &&
                  Input[p.Row][p.Col] != '#').ToList();
-                    return next;
+                return next;
             }
         }
         else
