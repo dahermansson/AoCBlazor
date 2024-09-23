@@ -67,28 +67,18 @@ public class Day20 : IDay
         public bool Mergeable(Range candidate)
         {
             if (candidate.Max - Min == 1 || (candidate.Min < Min && candidate.Max > Min))
-            {
                 return true;
-            }
-
             if (candidate.Min - Max == 1 || (candidate.Min < Max && candidate.Max > Max))
-            {
                 return true;
-            }
             return false;
         }
 
         public void Merge(Range merge)
         {
             if (merge.Max - Min == 1 || (merge.Min < Min && merge.Max > Min))
-            {
                 Min = merge.Min;
-            }
-
             if (merge.Min - Max == 1 || (merge.Min < Max && merge.Max > Max))
-            {
                 Max = merge.Max;
-            }
         }
     }
 }
