@@ -1,7 +1,7 @@
 using AoC.Solvers;
 
-const int YEAR = SolversManager.Y2016;
-string dayToRun = 22.ToString("D2");
+const int YEAR = SolversManager.Y2017;
+string dayToRun = 3.ToString("D2");
 
 var day = SolversManager.GetDay(YEAR, dayToRun);
 if (day != null)
