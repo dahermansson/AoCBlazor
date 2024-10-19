@@ -4,7 +4,7 @@ public class Day21 : IDay
 {
     public Day21(string input) => Input = InputParsers.GetInputLines(input);
     public string Output => _output;
-    private string _output;
+    private string _output {get; set; } = string.Empty;
 
     private string[] Input { get; set; }
 

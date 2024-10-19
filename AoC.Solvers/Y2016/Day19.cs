@@ -34,6 +34,6 @@ public class Day19: IDay
         }
         return elves.First!.Value;
 
-        LinkedListNode<int> GetNext(LinkedListNode<int> i) => i.Next ?? elves.First;
+        LinkedListNode<int> GetNext(LinkedListNode<int> i) => i?.Next ?? elves.First!;
     }
 }
