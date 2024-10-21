@@ -66,9 +66,9 @@ public class Day12(string input) : IDay
         }
         public int Jnz(int p, string x, string y)
         {
-            if (int.TryParse(x, out int v) )
+            if (int.TryParse(x, out int v))
             {
-                if(v != 0)
+                if (v != 0)
                     return p + int.Parse(y, System.Globalization.NumberStyles.AllowLeadingSign);
             }
             else if (Register[x] != 0)

@@ -2,7 +2,7 @@
 
 public class Day25(string input) : IDay
 {
-    public string Output { get; set;} = string.Empty;
+    public string Output { get; set; } = string.Empty;
     private string[] Input { get; set; } = InputParsers.GetInputLines(input);
 
     public int Star1()
@@ -93,9 +93,9 @@ public class Day25(string input) : IDay
         }
         public int Jnz(int p, string x, string y)
         {
-            if (int.TryParse(x, out int v) )
+            if (int.TryParse(x, out int v))
             {
-                if(v != 0)
+                if (v != 0)
                     return p + int.Parse(y, System.Globalization.NumberStyles.AllowLeadingSign);
             }
             else if (Register[x] != 0)
