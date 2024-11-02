@@ -6,9 +6,10 @@ public class Day03: IDay
 {
     public Day03(string input)
     {
-        while(input.Contains("  "))
-            input = input.Replace("  ", " ");
-        Input = InputParsers.GetInputLines(input).Select(t => t.Trim()).ToArray();
+        var temp = input;
+        while(temp.Contains("  "))
+            temp = temp.Replace("  ", " ");
+        Input = InputParsers.GetInputLines(temp).Select(t => t.Trim()).ToArray();
     }
     public string Output => throw new NotImplementedException();
 

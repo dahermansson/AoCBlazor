@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Components;
-using AoC.AoCUtils;
 using System.Diagnostics;
+using AoC.Solvers.Interface;
 using AoC.Solvers;
-using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
 namespace AoC.Web.Components.Pages;
 
 public partial class Puzzles: ComponentBase
@@ -26,6 +24,8 @@ public partial class Puzzles: ComponentBase
     private string BaseUrlPuzzle = "https://adventofcode.com/{0}/day/{1}";
     private string PuzzleLink { get; set; } = string.Empty;
     public string Star2 { get; set; } = string.Empty;
+    [Inject]
+    private SolversManager solversManager {get; init;} = default!;
 
     protected override Task OnParametersSetAsync()
     {
@@ -38,17 +38,16 @@ public partial class Puzzles: ComponentBase
         return Task.CompletedTask;
     }
 
-    protected Task ActivateDay(string day)
+    protected async Task ActivateDay(string day)
     {
         ActiveDay = day;
-        ActivePuzzle = SolversManager.GetDay(Year, day) ?? throw new Exception("Day missing");
+        ActivePuzzle = await solversManager.GetDay(Year, day) ?? throw new Exception("Day missing");
         Star1 = string.Empty;
         Star2 = string.Empty;
         Star1Ms = -1;
         Star2Ms = -1;
         SourceLink = string.Format(BaseUrlSource, Year, ActiveDay);
         PuzzleLink = string.Format(BaseUrlPuzzle, Year, int.Parse(ActiveDay));
-        return Task.CompletedTask;
     }
     protected async Task RunStar1()
     {

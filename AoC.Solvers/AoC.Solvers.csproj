@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AoC.AoCUtils\AoC.AoCUtils.csproj" />
+    <ProjectReference Include="..\AoC.InputHandling\AoC.InputHandling.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
