@@ -4,7 +4,7 @@ using AoC.InputHandling.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.ConfigureInputHandler().ConfiguresolversManager();
+builder.Host.ConfigureInputHandler().ConfiguresolversManager().ConfigureLogging(c => c.AddConsole());
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
