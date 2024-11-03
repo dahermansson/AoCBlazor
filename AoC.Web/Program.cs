@@ -4,7 +4,7 @@ using AoC.InputHandling.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.ConfigureInputHandler().ConfiguresolversManager().ConfigureLogging(c => c.AddConsole());
+builder.Host.ConfigureInputHandler().ConfiguresolversManager();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -16,9 +16,11 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    
 }
+
+// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+app.UseHsts();
 
 app.UseHttpsRedirection();
 
