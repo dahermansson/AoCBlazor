@@ -1,19 +1,14 @@
-﻿using System.Collections;
-using AoC.AoCUtils;
-
-namespace AoC.Solvers.Y2016;
+﻿namespace AoC.Solvers.Y2016;
 
 public class Day13: IDay
 {
     public Day13(string input)
     {
-        Input = input;
-        Goal = new Pos(int.Parse(Input.Split(" ")[1]),int.Parse(Input.Split(" ")[2]));
-        OfficeFavNumber = int.Parse(Input.Split(" ")[0]); 
+        Goal = new Pos(31,39);
+        OfficeFavNumber = int.Parse(input); 
     }
     public string Output => throw new NotImplementedException();
     private int OfficeFavNumber { get; set; }
-    private string Input {get; set;}
     private Pos Goal { get; set; }
 
     public int Star1()

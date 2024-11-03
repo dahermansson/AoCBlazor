@@ -3,12 +3,12 @@ using AoC.Web.Components;
 using AoC.InputHandling.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Host.ConfigureInputHandler().ConfiguresolversManager();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-
 
 var app = builder.Build();
 

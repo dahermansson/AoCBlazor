@@ -10,7 +10,10 @@
             "args": [],
             "cwd": "${workspaceRoot}/AoC.Cli",
             "stopAtEntry": false,
-            "console": "internalConsole"
+            "console": "internalConsole",
+            "env": {
+                "DOTNET_ENVIRONMENT": "Development"
+            }
         },
         {
             "name": ".NET Core Launch AoC.Web",
@@ -21,7 +24,10 @@
             "args": [],
             "cwd": "${workspaceRoot}/AoC.Web",
             "stopAtEntry": false,
-            "console": "internalConsole"
+            "console": "internalConsole",
+            "env": {
+                "DOTNET_ENVIRONMENT": "Development"
+            }
         }
     ]
 }
