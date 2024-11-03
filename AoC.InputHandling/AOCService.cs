@@ -9,6 +9,7 @@ public class AOCDownloadService(IHttpClientFactory httpClient, ILogger<AOCDownlo
     {
         try
         {
+            logger.LogInformation("Fetching Input year: {year} day: {}", year, day);
             var client = httpClient.CreateClient("aocclient");
             return await client.GetStringAsync($"{client.BaseAddress}{year}/day/{day}/input");
         }
