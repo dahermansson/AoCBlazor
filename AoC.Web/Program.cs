@@ -1,6 +1,7 @@
 using AoC.Solvers.Extensions;
 using AoC.Web.Components;
 using AoC.InputHandling.Extensions;
+using Microsoft.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,7 @@ builder.Host.ConfigureInputHandler().ConfiguresolversManager();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+    .AddInteractiveServerComponents().AddCircuitOptions(c => c.DetailedErrors = true);
 
 var app = builder.Build();
 
@@ -27,7 +28,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 
 app.Run();
