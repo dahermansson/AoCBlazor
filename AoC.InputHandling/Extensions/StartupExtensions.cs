@@ -9,6 +9,7 @@ namespace AoC.InputHandling.Extensions;
 public static class StartupExtensions
 {
     private static readonly string ENVIRONMENT_VARIABLE_AOC_SESSION_NAME = "AOC_SESSION";
+    private static readonly string AZURE_STORAGEFILE_CONNECTIONSTRING_NAME = "AZURE_STORAGEFILE_CONNECTIONSTRING";
     public static IHostBuilder ConfigureInputHandler(this IHostBuilder hostBuilder) =>
         hostBuilder.ConfigureServices((settings, services) =>
         {
@@ -30,24 +31,24 @@ public static class StartupExtensions
                 services.AddScoped<IAOCDownloadService, ManualAOCService>();
 
 
+
+            var azureStorageConnectionstring = new []{settings.Configuration.GetConnectionString("AzureStorage"), Environment.GetEnvironmentVariable(AZURE_STORAGEFILE_CONNECTIONSTRING_NAME)}.LastOrDefault(t => !string.IsNullOrEmpty(t));
             if (settings.HostingEnvironment.IsDevelopment())
             {
-                if (!string.IsNullOrEmpty(settings.Configuration.GetConnectionString("AzureStorage")))
-                    services.ConfigureAzureStorage(settings);
+                if (!string.IsNullOrEmpty(azureStorageConnectionstring))
+                    services.ConfigureAzureStorage(azureStorageConnectionstring);
                 else
                     services.ConfigureLocalStorage(settings);
             }
             else
-                services.ConfigureAzureStorage(settings);
+                services.ConfigureAzureStorage(azureStorageConnectionstring ?? throw new KeyNotFoundException("AzureStorage is missing"));
         });
 
-    private static void ConfigureAzureStorage(this IServiceCollection services, HostBuilderContext settings)
+    private static void ConfigureAzureStorage(this IServiceCollection services, string connectionString)
     {
         services.AddAzureClients(clientBuilder =>
         {
-            clientBuilder.AddFileServiceClient(settings.Configuration.GetConnectionString("AzureStorage")
-             ?? Environment.GetEnvironmentVariable("AzureStorage")
-             ?? throw new KeyNotFoundException("AzureStorage is missing"));
+            clientBuilder.AddFileServiceClient(connectionString);
         });
         services.AddSingleton(new AzureStorageInputHandlerOptions("adventofcodeinputs"));
         services.AddScoped<IInputHandler, AzureStorageInputHandler>();

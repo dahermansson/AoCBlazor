@@ -9,7 +9,7 @@ builder.Host.ConfigureInputHandler().ConfiguresolversManager();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents().AddCircuitOptions(c => c.DetailedErrors = true);
+    .AddInteractiveServerComponents();
 
 var app = builder.Build();
 
