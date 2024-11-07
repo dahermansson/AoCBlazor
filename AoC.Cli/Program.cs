@@ -3,10 +3,9 @@ using AoC.Solvers.Extensions;
 using AoC.InputHandling.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 
-var host = Host.CreateDefaultBuilder(args).ConfigureLogging(c => c.AddConsole())
+var host = Host.CreateDefaultBuilder(args)
     .ConfigureInputHandler()
     .ConfiguresolversManager()
     .Build();
