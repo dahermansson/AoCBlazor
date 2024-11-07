@@ -1,7 +1,6 @@
 using System.Reflection;
 using AoC.InputHandling.Interfaces;
 
-
 namespace AoC.Solvers;
 
 public class SolversManager(IInputHandler inputHandler)
