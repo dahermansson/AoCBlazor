@@ -6,9 +6,8 @@ namespace AoC.Solvers.Extensions;
 public static class StartupExtensions
 {
     public static IHostBuilder ConfiguresolversManager(this IHostBuilder hostBuilder) =>
-    hostBuilder.ConfigureServices(services =>
-    {
-        services.AddScoped<SolversManager>();
-    });
+    hostBuilder.ConfigureServices(services => 
+        services.AddScoped<SolversManager>()
+        );
 };
 

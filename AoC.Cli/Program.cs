@@ -3,15 +3,17 @@ using AoC.Solvers.Extensions;
 using AoC.InputHandling.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureInputHandler()
     .ConfiguresolversManager()
+    .ConfigureLogging(c => c.AddConsole())
     .Build();
 
 const int YEAR = SolversManager.Y2017;
-string dayToRun = 6.ToString("D2");
+string dayToRun = 7.ToString("D2");
 
 using var scope = host.Services.CreateScope();
 var solverManager = scope.ServiceProvider.GetRequiredService<SolversManager>();

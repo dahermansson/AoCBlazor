@@ -15,7 +15,7 @@ public class BaseConverterTests
     {
         var alfaBase = Enumerable.Range(0, 26).Select(t => (char)(t+97)).ToList();
         alfaBase.Insert(0, '-');
-        BaseConverter bc = new BaseConverter(alfaBase.ToArray());
+        BaseConverter bc = new(alfaBase.ToArray());
         Assert.Equal(res, bc.ToBase(i));
     }
 
@@ -29,7 +29,7 @@ public class BaseConverterTests
     {
         var alfaBase = Enumerable.Range(0, 26).Select(t => (char)(t+97)).ToList();
         alfaBase.Insert(0, '-');
-        BaseConverter bc = new BaseConverter(alfaBase.ToArray());
+        BaseConverter bc = new(alfaBase.ToArray());
         Assert.Equal(res, bc.ToNumber(b));
     }
     
