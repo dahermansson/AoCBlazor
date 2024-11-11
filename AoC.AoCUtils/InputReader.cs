@@ -4,7 +4,7 @@ public static class InputReader
     public static string GetInput(int year, string day)
     {
 #if DEBUG
-        string path = Path.Combine("bin", "Debug", "net8.0", $"Y{year}", "inputs", $"{day}.txt");
+        string path = Path.Combine("bin", "Debug", "net9.0", $"Y{year}", "inputs", $"{day}.txt");
 #else
             string path = Path.Combine($"Y{year}", "inputs", $"{day}.txt");
 #endif
