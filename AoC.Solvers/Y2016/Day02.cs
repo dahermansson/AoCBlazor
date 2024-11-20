@@ -2,13 +2,9 @@
 
 namespace AoC.Solvers.Y2016;
 
-public class Day02 : IDay
+public class Day02(string input) : IDay
 {
-    public Day02(string input)
-    {
-        Input = InputParsers.GetInputLines(input);
-    }
-    private string[] Input {get; set;}
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
     public string Output => _output;
 
     private int[][] Keypad = [

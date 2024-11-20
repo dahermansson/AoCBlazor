@@ -2,14 +2,10 @@
 
 namespace AoC.Solvers.Y2015;
 
-public class Day15: IDay
+public class Day15(string input) : IDay
 {
-    public Day15(string input)
-    {
-        Input = InputParsers.GetInputLines(input);
-    }
     public string Output => throw new NotImplementedException();
-    private string[] Input {get; set;}
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
     public int Star1() => GetScores(new Cookie(Input.Select(t => new Ingredient(t)).ToList()), new List<int>(), 100);
     public int Star2() => GetCalories(new Cookie(Input.Select(t => new Ingredient(t)).ToList()), new List<int>(), 100);
     private int GetScores(Cookie cookie, List<int> amounts, int nummer)
@@ -67,13 +63,9 @@ public class Day15: IDay
         }
         
     }
-    private class Cookie
+    private class Cookie(List<Day15.Ingredient> ingredients)
     {
-        public List<Ingredient> Ingredients { get; set; }
-        public Cookie(List<Ingredient> ingredients)
-        {
-            Ingredients = ingredients;
-        }
+        public List<Ingredient> Ingredients { get; set; } = ingredients;
 
         public int GetTotalScore(int[] amounts)
         {

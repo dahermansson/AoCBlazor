@@ -1,11 +1,10 @@
 ﻿namespace AoC.Solvers.Y2016;
 
-public class Day16 : IDay
+public class Day16(string input) : IDay
 {
-    public Day16(string input) => Input = input;
     public string Output => output;
     private string output { get; set; } = default!;
-    private string Input { get; set; }
+    private string Input { get; set; } = input;
     private static readonly bool[] Zero = [false];
     public int Star1()
     {

@@ -3,12 +3,11 @@ using Microsoft.Toolkit.HighPerformance;
 
 namespace AoC.Solvers.Y2016;
 
-public class Day08: IDay
+public class Day08(string input) : IDay
 {
-    public Day08(string input) => Input = InputParsers.GetInputLines(input);
     public string Output => output;
 
-    private string[] Input {get; set;}
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
 
     public int Star1()
     {

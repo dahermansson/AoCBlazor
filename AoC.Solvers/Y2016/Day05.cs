@@ -4,13 +4,11 @@ using System.Text;
 
 namespace AoC.Solvers.Y2016;
 
-public class Day05: IDay
+public class Day05(string input) : IDay
 {
-    public Day05(string input) => Input = input;
-    
     public string Output => output;
     private string output = string.Empty;
-    private string Input {get; set;}
+    private string Input { get; set; } = input;
     private Dictionary<byte, string> Lut = new() {
         { 0, "0"},
         { 1, "1"},

@@ -2,15 +2,11 @@ using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2015;
 
-public class Day22: IDay
+public class Day22(string input) : IDay
 {
-    public Day22(string input)
-    {
-        Input = input;
-    }
     public string Output => throw new NotImplementedException();
 
-    private string Input {get; set;}
+    private string Input { get; set; } = input;
     private class ActiveSpell(int turnsLeft, Spell spell)
     {
         public int TurnsLeft { get; set; } = turnsLeft;

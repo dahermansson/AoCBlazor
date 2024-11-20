@@ -2,12 +2,11 @@
 
 namespace AoC.Solvers.Y2023;
 
-public class Day14: IDay
+public class Day14(string input) : IDay
 {
-    public Day14(string input) => Input = InputParsers.GetInputLines(input).ToList();
     public string Output => throw new NotImplementedException();
 
-    private List<string> Input {get; set;}
+    private List<string> Input { get; set; } = InputParsers.GetInputLines(input).ToList();
 
     public int Star1() => Tilt(GetColumns(Input), false).Sum(c => c.IndexOfMany(k => k == 'O').Select(i => c.Length - i).Sum());
 

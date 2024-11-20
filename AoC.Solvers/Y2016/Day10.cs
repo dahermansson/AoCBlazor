@@ -2,12 +2,11 @@
 
 namespace AoC.Solvers.Y2016;
 
-public class Day10 : IDay
+public class Day10(string input) : IDay
 {
-    public Day10(string input) => Input = InputParsers.GetInputLines(input);
     public string Output => throw new NotImplementedException();
 
-    private string[] Input { get; set; }
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
     Dictionary<int, Bot> Bots = new();
     Dictionary<int, int> Bins = new();
     private int Star1Value = 0;

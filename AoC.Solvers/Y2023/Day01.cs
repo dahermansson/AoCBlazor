@@ -1,12 +1,9 @@
-﻿using AoC.AoCUtils;
+﻿namespace AoC.Solvers.Y2023;
 
-namespace AoC.Solvers.Y2023;
-
-public class Day01: IDay
+public class Day01(string input) : IDay
 {
-    public Day01(string input) => Input = InputParsers.GetInputLines(input);
     public string Output => throw new NotImplementedException();
-    private string[] Input {get; set;}
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
     public int Star1() => Input.Sum(t => int.Parse($"{t.First(char.IsAsciiDigit)}{t.Last(char.IsAsciiDigit)}"));
     public int Star2() => Input.Sum(l => {
             var firstDigit = Digits.Select((d, i) => (i: l.IndexOf(d), v: Values[i])).Where(r => r.i > -1).MinBy(r => r.i).v;

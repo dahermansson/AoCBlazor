@@ -1,11 +1,10 @@
 ﻿namespace AoC.Solvers.Y2023;
 
-public class Day12 : IDay
+public class Day12(string input) : IDay
 {
-    public Day12(string input) => Input = InputParsers.GetInputLines(input);
     public string Output => output;
     private string output { get; set; } = default!;
-    private string[] Input { get; set; }
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
 
     public int Star1()
     {

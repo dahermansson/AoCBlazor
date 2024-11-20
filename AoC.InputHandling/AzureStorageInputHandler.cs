@@ -1,9 +1,8 @@
 ﻿using AoC.InputHandling.Interfaces;
 using Azure.Storage.Files.Shares;
 using Microsoft.Extensions.Logging;
-namespace AoC.InputHandling;
 
-public record AzureStorageInputHandlerOptions(string Share);
+namespace AoC.InputHandling;
 
 public class AzureStorageInputHandler(IAOCDownloadService aocService, ShareServiceClient shareServiceClient, AzureStorageInputHandlerOptions azureStorageInputHandlerOptions, ILogger<AzureStorageInputHandler> logger) : IInputHandler
 {

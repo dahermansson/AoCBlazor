@@ -1,13 +1,10 @@
-﻿using AoC.AoCUtils;
+﻿namespace AoC.Solvers.Y2023;
 
-namespace AoC.Solvers.Y2023;
-
-public class Day04 : IDay
+public class Day04(string input) : IDay
 {
-    public Day04(string input) => Input = InputParsers.GetInputLines(input).Select(i => new Card(i)).ToArray();
     public string Output => throw new NotImplementedException();
 
-    private Card[] Input { get; set; }
+    private Card[] Input { get; set; } = InputParsers.GetInputLines(input).Select(i => new Card(i)).ToArray();
 
     public int Star1() => Input.Sum(t => (int)Math.Pow(2, t.Points - 1));
 

@@ -15,7 +15,7 @@ public class AOCDownloadService(IHttpClientFactory httpClient, ILogger<AOCDownlo
         }
         catch (Exception ex)
         {
-            logger.LogWarning(ex, "Fail to download input, fix your AOC_SESSION Environment variable");
+            logger.LogError(ex, "Fail to download input, fix your AOC_SESSION Environment variable");
             return "";
         }
     }

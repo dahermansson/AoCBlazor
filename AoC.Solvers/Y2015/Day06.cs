@@ -2,15 +2,11 @@
 using Microsoft.Toolkit.HighPerformance;
 namespace AoC.Solvers.Y2015;
 
-public class Day06: IDay
+public class Day06(string input) : IDay
 {
-    public Day06(string input)
-    {
-        Input = InputParsers.GetInputLines(input);
-    }
     public string Output => throw new NotImplementedException();
 
-    private string[] Input {get; set;}
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
 
     public int Star1()
     {

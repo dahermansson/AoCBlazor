@@ -4,15 +4,11 @@ using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2015;
 
-public class Day10: IDay
+public class Day10(string input) : IDay
 {
-    public Day10(string input)
-    {
-        Input = input;
-    }
     public string Output => throw new NotImplementedException();
 
-    private string Input {get; set;}
+    private string Input { get; set; } = input;
 
     public int Star1()
     {

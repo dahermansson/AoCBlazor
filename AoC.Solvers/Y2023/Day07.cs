@@ -1,12 +1,9 @@
-﻿using AoC.AoCUtils;
+﻿namespace AoC.Solvers.Y2023;
 
-namespace AoC.Solvers.Y2023;
-
-public class Day07 : IDay
+public class Day07(string input) : IDay
 {
-    public Day07(string input) => Input = InputParsers.GetInputLines(input);
     public string Output => throw new NotImplementedException();
-    private string[] Input { get; set; }
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
     public static Dictionary<char, int> Cards = new(){
         {'A',14},{'K',13},{'Q',12},{'J',11},{'T',10},{'9',9},{'8',8},{'7',7},{'6',6},{'5',5},{'4',4},{'3',3},{'2',2}
      };

@@ -1,11 +1,10 @@
 ﻿namespace AoC.Solvers.Y2016;
 
-public class Day19: IDay
+public class Day19(string input) : IDay
 {
-    public Day19(string input) => Input = input;
     public string Output => throw new NotImplementedException();
 
-    private string Input {get; set;}
+    private string Input { get; set; } = input;
 
     public int Star1()
     {

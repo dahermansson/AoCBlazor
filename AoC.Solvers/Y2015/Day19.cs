@@ -2,17 +2,13 @@
 
 namespace AoC.Solvers.Y2015;
 
-public class Day19: IDay
+public class Day19(string input) : IDay
 {
-    public Day19(string input)
-    {
-        Input = InputParsers.GetInputLines(input);
-    }
     public string Output => throw new NotImplementedException();
 
     private Replacement Parse(string s) => new Replacement(s.Split(" ").First(), s.Split(" ").Last());
 
-    private string[] Input {get; set;}
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
 
     public int Star1()
     {

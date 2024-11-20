@@ -3,15 +3,11 @@ using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2015;
 
-public class Day04: IDay
+public class Day04(string input) : IDay
 {
-    public Day04(string input)
-    {
-        Input = input;
-    }
     public string Output => throw new NotImplementedException();
 
-    private string Input {get; set;}
+    private string Input { get; set; } = input;
 
     public int Star1() => FindHash(5, Input);
     public int Star2() => FindHash(6, Input);

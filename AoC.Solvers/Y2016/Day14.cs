@@ -3,12 +3,11 @@ using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2016;
 
-public class Day14: IDay
+public class Day14(string input) : IDay
 {
-    public Day14(string input) => Input = input;
     public string Output => throw new NotImplementedException();
 
-    private string Input {get; set;}
+    private string Input { get; set; } = input;
     private MD5 md5 = MD5.Create();
     public int Star1()
     {

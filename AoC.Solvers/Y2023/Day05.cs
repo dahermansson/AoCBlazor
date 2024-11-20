@@ -1,6 +1,4 @@
-﻿using AoC.AoCUtils;
-
-namespace AoC.Solvers.Y2023;
+﻿namespace AoC.Solvers.Y2023;
 
 public class Day05: IDay
 {

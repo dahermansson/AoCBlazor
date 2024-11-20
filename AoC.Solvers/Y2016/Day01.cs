@@ -1,15 +1,11 @@
 ﻿using AoC.AoCUtils;
 namespace AoC.Solvers.Y2016;
 
-public class Day01: IDay
+public class Day01(string input) : IDay
 {
-    public Day01(string input)
-    {
-        Input = input;
-    }
     public string Output => throw new NotImplementedException();
 
-    private string Input {get; set;}
+    private string Input { get; set; } = input;
     public int Star1()
     {
         var turns = Input.Split(", ");

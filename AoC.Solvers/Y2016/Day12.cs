@@ -21,15 +21,12 @@ public class Day12(string input) : IDay
         return c.Register["a"];
     }
 
-    private class Computer
+    private class Computer(string[] instructions)
     {
         public Dictionary<string, int> Register { get; set; } = new() { { "a", 0 }, { "b", 0 }, { "c", 0 }, { "d", 0 } };
         private int Pointer { get; set; } = 0;
-        private string[] Instructions { get; set; }
-        public Computer(string[] instructions)
-        {
-            Instructions = instructions;
-        }
+        private string[] Instructions { get; set; } = instructions;
+
         public void Run()
         {
             while (Pointer > -1 && Pointer < Instructions.Length)

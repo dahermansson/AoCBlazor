@@ -2,11 +2,10 @@
 
 namespace AoC.Solvers.Y2016;
 
-public class Day07 : IDay
+public class Day07(string input) : IDay
 {
-    public Day07(string input) => Input = InputParsers.GetInputLines(input).Select(t => new IP(t)).ToArray();
     public string Output => throw new NotImplementedException();
-    private IP[] Input { get; set; }
+    private IP[] Input { get; set; } = InputParsers.GetInputLines(input).Select(t => new IP(t)).ToArray();
     public int Star1() => Input.Count(t => TLS(t));
     public int Star2() => Input.Count(t => SSL(t));
     private bool TLS(IP ip) => ip.Outer.Any(t => HasABBA(t) && !ip.Hypernet.Any(t => HasABBA(t)));

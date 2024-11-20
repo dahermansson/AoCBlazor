@@ -1,13 +1,10 @@
-﻿using System.Security.Authentication.ExtendedProtection;
+﻿namespace AoC.Solvers.Y2023;
 
-namespace AoC.Solvers.Y2023;
-
-public class Day15 : IDay
+public class Day15(string input) : IDay
 {
-    public Day15(string input) => Input = input.Split(",");
     public string Output => throw new NotImplementedException();
 
-    private string[] Input { get; set; }
+    private string[] Input { get; set; } = input.Split(",");
 
     public int Star1() => Input.Sum(t => Hash(t));
 

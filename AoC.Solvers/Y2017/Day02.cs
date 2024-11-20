@@ -1,11 +1,10 @@
 ﻿namespace AoC.Solvers.Y2017;
 
-public class Day02 : IDay
+public class Day02(string input) : IDay
 {
-    public Day02(string input) => Input = InputParsers.GetInputLines(input);
     public string Output => throw new NotImplementedException();
 
-    private string[] Input { get; set; }
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
 
     public int Star1() => Input.Sum(t =>
         {

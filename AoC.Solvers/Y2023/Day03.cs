@@ -1,13 +1,10 @@
-﻿using AoC.AoCUtils;
+﻿namespace AoC.Solvers.Y2023;
 
-namespace AoC.Solvers.Y2023;
-
-public class Day03 : IDay
+public class Day03(string input) : IDay
 {
-    public Day03(string input) => Input = InputParsers.GetInputLines(input);
     public string Output => throw new NotImplementedException();
 
-    private string[] Input { get; set; }
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
 
     public int Star1() => Input.Select((row, i) =>
     {

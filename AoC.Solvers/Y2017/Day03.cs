@@ -1,10 +1,9 @@
 ﻿namespace AoC.Solvers.Y2017;
 
-public class Day03 : IDay
+public class Day03(string input) : IDay
 {
-    public Day03(string input) => Input = int.Parse(input);
     public string Output => _output;
-    private int Input { get; set; }
+    private int Input { get; set; } = int.Parse(input);
     private string _output { get; set; } = string.Empty;
 
     public int Star1()

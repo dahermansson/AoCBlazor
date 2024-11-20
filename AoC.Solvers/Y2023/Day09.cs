@@ -1,12 +1,11 @@
 ﻿namespace AoC.Solvers.Y2023;
 
-public class Day09 : IDay
+public class Day09(string input) : IDay
 {
-    public Day09(string input) => Input = InputParsers.GetInputLines(input)
+    public string Output => throw new NotImplementedException();
+    private List<int[]> Input { get; set; } = InputParsers.GetInputLines(input)
         .Select(t => t.Split(" ")
         .Select(i => int.Parse(i, System.Globalization.NumberStyles.AllowLeadingSign)).ToArray()).ToList();
-    public string Output => throw new NotImplementedException();
-    private List<int[]> Input { get; set; }
     public int Star1() => Input.Sum(t => Extrapolate(Predict([..t]).Select(t => t.Last()).ToArray()).Last());
     public int Star2() => Input.Sum(t => ExtrapolateBack(Predict([..t]).Select(t => t.First()).ToArray()).Last());
 

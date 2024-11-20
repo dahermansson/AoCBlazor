@@ -3,16 +3,11 @@ using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2016;
 
-public class Day04: IDay
+public class Day04(string input) : IDay
 {
-    public Day04(string input)
-    {
-        Input = InputParsers.GetInputLines(input);
-        //Input = ["aaaaa-bbb-z-y-x-123[abxyz]", "a-b-c-d-e-f-g-h-987[abcde]", "not-a-real-room-404[oarel]", "totally-real-room-200[decoy]"];
-    }
     public string Output => throw new NotImplementedException();
 
-    private string[] Input {get; set;}
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
     //176749 to high
     //174976 to high
     //173787

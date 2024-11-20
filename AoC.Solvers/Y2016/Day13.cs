@@ -1,15 +1,10 @@
 ﻿namespace AoC.Solvers.Y2016;
 
-public class Day13: IDay
+public class Day13(string input) : IDay
 {
-    public Day13(string input)
-    {
-        Goal = new Pos(31,39);
-        OfficeFavNumber = int.Parse(input); 
-    }
     public string Output => throw new NotImplementedException();
-    private int OfficeFavNumber { get; set; }
-    private Pos Goal { get; set; }
+    private int OfficeFavNumber { get; set; } = int.Parse(input);
+    private Pos Goal { get; set; } = new Pos(31, 39);
 
     public int Star1()
     {

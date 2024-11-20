@@ -1,35 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+namespace AoC.AoCUtils;
 
-namespace AoC.AoCUtils
+public class Graph<T> where T: notnull
 {
-    public class Graph<T> where T: notnull
+    public Dictionary<T, HashSet<Edge<T>>> Nodes {get; set;} = [];
+    public Graph(IEnumerable<T> nodes, IEnumerable<Edge<T>> edges, bool doubleDirected = true)
     {
-        public Dictionary<T, HashSet<Edge<T>>> Nodes {get; set;} = new Dictionary<T, HashSet<Edge<T>>>();
-        public Graph(IEnumerable<T> nodes, IEnumerable<Edge<T>> edges, bool doubleDirected = true)
-        {
-            foreach (var node in nodes)
-                Nodes[node] = new HashSet<Edge<T>>();
+        foreach (var node in nodes)
+            Nodes[node] = [];
 
-            foreach (var edge in edges)
-            {
-                Nodes[edge.Start].Add(edge);
-                if(doubleDirected)
-                    Nodes[edge.End].Add(new Edge<T>(edge.End, edge.Start));
-            }
+        foreach (var edge in edges)
+        {
+            Nodes[edge.Start].Add(edge);
+            if(doubleDirected)
+                Nodes[edge.End].Add(new Edge<T>(edge.End, edge.Start));
         }
     }
+}
 
-    public class Edge<T>
-    {
-        public Edge(T start, T end)
-        {
-            Start = start;
-            End = end;
-        }
-        public T Start { get; set; }
-        public T End { get; set; }
-    }
+public class Edge<T>(T start, T end)
+{
+    public T Start { get; set; } = start;
+    public T End { get; set; } = end;
 }

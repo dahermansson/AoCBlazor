@@ -2,11 +2,10 @@
 
 namespace AoC.Solvers.Y2015;
 
-public class Day21 : IDay
+public class Day21(string input) : IDay
 {
-    public Day21(string input) => Input = input;
     public string Output => throw new NotImplementedException();
-    private string Input { get; set; }
+    private string Input { get; set; } = input;
     public int Star1() => RunConfigurations().leastAmountWin;
     public int Star2() => RunConfigurations().mostAmountLost;
     private bool RunGame(Character you, Character boss)

@@ -3,13 +3,12 @@ using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2016;
 
-public class Day09: IDay
+public class Day09(string input) : IDay
 {
-    public Day09(string input) => Input = input;
     public string Output => output;
 
     public string output { get; set; } = string.Empty;
-    private string Input {get; set;}
+    private string Input { get; set; } = input;
 
     public int Star1() => Decompress(Input).Count(p => !string.IsNullOrWhiteSpace(p.ToString()));
     private string Decompress(string s)

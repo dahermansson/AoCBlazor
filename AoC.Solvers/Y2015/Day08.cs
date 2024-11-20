@@ -3,15 +3,11 @@ using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2015;
 
-public class Day08: IDay
+public class Day08(string input) : IDay
 {
-    public Day08(string input)
-    {
-        Input = InputParsers.GetInputLines(input).ToArray();
-    }
     public string Output => throw new NotImplementedException();
 
-    private string[] Input {get; set;}
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input).ToArray();
 
     public int Star1() => Input.Sum(s => s.Length) - Input.Sum(s => CountChars(s));
 

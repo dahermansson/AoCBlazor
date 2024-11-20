@@ -2,14 +2,11 @@
 
 namespace AoC.Solvers.Y2015;
 
-public class Day24: IDay
+public class Day24(string input) : IDay
 {
-    public Day24(string input) => 
-        Input = [.. InputParsers.GetInputLines(input).Select(t => long.Parse(t)).OrderByDescending(t => t)];
-    
     public string Output => output;
-    private long[] Input {get; set;}
-    
+    private long[] Input { get; set; } = [.. InputParsers.GetInputLines(input).Select(t => long.Parse(t)).OrderByDescending(t => t)];
+
     public int Star1()
     {
         output = FindBestLegRoom(3).ToString();

@@ -4,15 +4,11 @@ using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2015;
 
-public class Day12: IDay
+public class Day12(string input) : IDay
 {
-    public Day12(string input)
-    {
-        Input = input;
-    }
     public string Output => throw new NotImplementedException();
 
-    private string Input {get; set;}
+    private string Input { get; set; } = input;
 
     //public int Star1() => Regex.Matches(Input, "-?\\d+").Sum(t => int.Parse(t.Value));
     public int Star1()

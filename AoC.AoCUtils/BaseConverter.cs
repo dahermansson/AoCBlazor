@@ -1,15 +1,9 @@
 namespace AoC.AoCUtils;
 
-public class BaseConverter
+public class BaseConverter(char[] baseChars)
 {
-    public BaseConverter(char[] baseChars)
-    {
-        BaseChars = baseChars;
-        CharValues = baseChars.Select((c, i) => (c, i)).ToDictionary(t => t.c, t => t.i);
-    }
-
-    public char[] BaseChars { get; set; }
-    public Dictionary<char, int> CharValues {get; set;}
+    public char[] BaseChars { get; set; } = baseChars;
+    public Dictionary<char, int> CharValues { get; set; } = baseChars.Select((c, i) => (c, i)).ToDictionary(t => t.c, t => t.i);
 
     public string ToBase(long i)
     {

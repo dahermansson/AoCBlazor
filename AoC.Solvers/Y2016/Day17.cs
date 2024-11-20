@@ -2,18 +2,13 @@
 
 namespace AoC.Solvers.Y2016;
 
-public class Day17 : IDay
+public class Day17(string input) : IDay
 {
-    public Day17(string input)
-    {
-        Input = input;
-        DoorOpener = MD5.Create();
-    }
     public string Output => output;
     private string output = string.Empty;
-    private MD5 DoorOpener { get; init; }
+    private MD5 DoorOpener { get; init; } = MD5.Create();
 
-    private string Input { get; set; }
+    private string Input { get; set; } = input;
     private int GridSize { get; set; } = 4;
 
     public int Star1()

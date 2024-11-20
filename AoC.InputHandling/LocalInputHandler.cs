@@ -3,8 +3,6 @@ using Microsoft.Extensions.Logging;
 
 namespace AoC.InputHandling;
 
-public record LocalInputHandlerOptions(string Path);
-
 public class LocalInputHandler(IAOCDownloadService aocService, LocalInputHandlerOptions localInputHandlerOptions, ILogger<LocalInputHandler> logger) : IInputHandler
 {
     private string RootPath {get; } = localInputHandlerOptions.Path;
@@ -26,5 +24,4 @@ public class LocalInputHandler(IAOCDownloadService aocService, LocalInputHandler
     {
         if(!Directory.Exists(directory)) Directory.CreateDirectory(directory);
     }
-    
 }
