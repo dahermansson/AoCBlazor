@@ -1,5 +1,4 @@
-﻿using AoC.AoCUtils;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 namespace AoC.Solvers.Y2016;

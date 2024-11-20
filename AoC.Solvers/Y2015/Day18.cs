@@ -1,5 +1,3 @@
-using AoC.AoCUtils;
-
 namespace AoC.Solvers.Y2015;
 
 public class Day18: IDay

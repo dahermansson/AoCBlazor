@@ -20,10 +20,11 @@ public partial class Puzzles: ComponentBase
     private bool Star1ButtonStatus { get; set; } = false;
     private bool Star2ButtonStatus { get; set; } = false;
     private string SourceLink { get; set; } = string.Empty;
-    private string BaseUrlSource = "https://raw.githubusercontent.com/dahermansson/AoCBlazor/main/AoC.Solvers/Y{0}/Day{1}.cs";
-    private string BaseUrlPuzzle = "https://adventofcode.com/{0}/day/{1}";
+    private readonly string BaseUrlSource = "https://raw.githubusercontent.com/dahermansson/AoCBlazor/main/AoC.Solvers/Y{0}/Day{1}.cs";
+    private readonly string BaseUrlPuzzle = "https://adventofcode.com/{0}/day/{1}";
     private string PuzzleLink { get; set; } = string.Empty;
     public string Star2 { get; set; } = string.Empty;
+    
     [Inject]
     private SolversManager solversManager {get; init;} = default!;
 

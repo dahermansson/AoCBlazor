@@ -27,7 +27,7 @@ public class Day15(string input) : IDay
         MatrixPathFinding<int> graph = new MatrixPathFinding<int>(Matrix);
         var start = Matrix.Get(0, 0);
         var end = Matrix.Get(Matrix.Rows - 1, Matrix.Columns - 1);
-        graph.Dijkstra(start, (t, p)=> p.Value);
+        graph.Dijkstra(start, (t, p)=> t + p.Value);
         return graph.GetCost(end);
     }
 }

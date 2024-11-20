@@ -1,7 +1,4 @@
-﻿using System.Text;
-using AoC.AoCUtils;
-
-namespace AoC.Solvers.Y2015;
+﻿namespace AoC.Solvers.Y2015;
 
 public class Day20(string input) : IDay
 {

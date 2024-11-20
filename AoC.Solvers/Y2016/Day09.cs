@@ -1,5 +1,4 @@
 ﻿using System.Numerics;
-using AoC.AoCUtils;
 
 namespace AoC.Solvers.Y2016;
 

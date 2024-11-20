@@ -1,13 +1,11 @@
-﻿using AoC.AoCUtils;
-
-namespace AoC.Solvers.Y2015;
+﻿namespace AoC.Solvers.Y2015;
 
 public class Day07(string input) : IDay
 {
     public string Output => throw new NotImplementedException();
 
     private string[] Input { get; set; } = InputParsers.GetInputLines(input);
-    //private List<Instruction> Instructions {get; set;}
+    
     private Instruction ParseInstruction(string s)
     {
         var splits = s.Split(" ");

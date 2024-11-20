@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Text;
-using AoC.AoCUtils;
+﻿using System.Text;
 
 namespace AoC.Solvers.Y2015;
 
@@ -32,7 +30,7 @@ public class Day10(string input) : IDay
         return res.Length;
     }
 
-    private string LookAndSay(string s)
+    private static string LookAndSay(string s)
     {
         var res = new StringBuilder();
         int index = 0;

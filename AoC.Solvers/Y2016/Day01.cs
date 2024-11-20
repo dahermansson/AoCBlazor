@@ -1,5 +1,4 @@
-﻿using AoC.AoCUtils;
-namespace AoC.Solvers.Y2016;
+﻿namespace AoC.Solvers.Y2016;
 
 public class Day01(string input) : IDay
 {

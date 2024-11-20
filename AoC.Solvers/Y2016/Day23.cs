@@ -1,6 +1,4 @@
-﻿using SixLabors.ImageSharp;
-
-namespace AoC.Solvers.Y2016;
+﻿namespace AoC.Solvers.Y2016;
 
 public class Day23(string input) : IDay
 {

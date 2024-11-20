@@ -25,7 +25,7 @@ public class MatrixPathFinding<T>
         {
             MatrixPoint<T> current = Candidates.ElementAt(0).Value;
             Candidates.RemoveAt(Candidates.IndexOfValue(current));
-            foreach (var node in _graph.GetCrossNeighbours(current).Where(t => !Visited.Contains(t) && (Convert.ToInt32(t.Value) <= Convert.ToInt32(current.Value) || Convert.ToInt32(t.Value) - 1 == Convert.ToInt32(current.Value))))
+            foreach (var node in _graph.GetCrossNeighbours(current).Where(t => !Visited.Contains(t)))// && (Convert.ToInt32(t.Value) <= Convert.ToInt32(current.Value) || Convert.ToInt32(t.Value) - 1 == Convert.ToInt32(current.Value))))
             {
                 var cost = costFunc(Cost[current], node);
                 if(cost < Cost[node])
