@@ -12,8 +12,8 @@ var host = Host.CreateDefaultBuilder(args)
     .ConfigureLogging(c => c.AddConsole())
     .Build();
 
-const int YEAR = SolversManager.Y2017;
-string dayToRun = 7.ToString("D2");
+const int YEAR = SolversManager.Y2021;
+string dayToRun = 15.ToString("D2");
 
 using var scope = host.Services.CreateScope();
 var solverManager = scope.ServiceProvider.GetRequiredService<SolversManager>();

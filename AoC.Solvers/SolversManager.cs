@@ -8,6 +8,7 @@ public class SolversManager(IInputHandler inputHandler)
     public const int Y2015 = 2015;
     public const int Y2016 = 2016;
     public const int Y2017 = 2017;
+    public const int Y2021 = 2021;
     public const int Y2023 = 2023;
     public static List<string> GetDays(int year)
     {
