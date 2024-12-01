@@ -10,6 +10,7 @@ public class SolversManager(IInputHandler inputHandler)
     public const int Y2017 = 2017;
     public const int Y2021 = 2021;
     public const int Y2023 = 2023;
+    public const int Y2024 = 2024;
     public static List<string> GetDays(int year)
     {
         var theList = Assembly.GetExecutingAssembly().GetTypes()

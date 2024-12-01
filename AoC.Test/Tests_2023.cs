@@ -3,7 +3,6 @@ namespace AoC.Test;
 using AoC.Solvers.Y2023;
 public class Tests_2023
 {
-    
     [InlineData("""
     1abc2
     pqr3stu8vwx

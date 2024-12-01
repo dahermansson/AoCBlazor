@@ -8,12 +8,12 @@ using Microsoft.Extensions.Logging;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureInputHandler()
-    .ConfiguresolversManager()
+    .ConfigureSolversManager()
     .ConfigureLogging(c => c.AddConsole())
     .Build();
 
-const int YEAR = SolversManager.Y2021;
-string dayToRun = 15.ToString("D2");
+const int YEAR = SolversManager.Y2024;
+string dayToRun = 1.ToString("D2");
 
 using var scope = host.Services.CreateScope();
 var solverManager = scope.ServiceProvider.GetRequiredService<SolversManager>();

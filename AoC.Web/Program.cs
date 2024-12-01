@@ -1,11 +1,10 @@
 using AoC.Solvers.Extensions;
 using AoC.Web.Components;
 using AoC.InputHandling.Extensions;
-using Microsoft.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.ConfigureInputHandler().ConfiguresolversManager();
+builder.Host.ConfigureInputHandler().ConfigureSolversManager();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
