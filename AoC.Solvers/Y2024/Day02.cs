@@ -1,28 +1,26 @@
-﻿using Microsoft.Extensions.Azure;
+﻿namespace AoC.Solvers.Y2024;
 
-namespace AoC.Solvers.Y2024;
-
-public class Day02: IDay
+public class Day02(string input) : IDay
 {
-    public Day02(string input) => Input = InputParsers.GetInputLines(input);
     public string Output => throw new NotImplementedException();
 
-    private string[] Input {get; set;}
+    private List<int[]> Input { get; set; } = InputParsers.GetInputLines(input).Select(t => t.Split(" ").Select(int.Parse).ToArray()).ToList();
 
-    public int Star1()
+    private static bool IsReportSafe(int[] report)
     {
-        bool Safe(int[] report)
-        {
-            if(report.Zip(report.OrderByDescending(t => t)).Any(t => t.First != t.Second) && report.Zip(report.OrderBy(t => t)).Any(t => t.First != t.Second))
-                return false;
-            return report.Zip(report.Skip(1)).All(t => Math.Abs(t.First- t.Second) is 1 or 2 or 3);
-        }
+        if (report.Zip(report.OrderByDescending(t => t)).Any(t => t.First != t.Second) && report.Zip(report.OrderBy(t => t)).Any(t => t.First != t.Second))
+            return false;
 
-        return Input.Count(t => Safe(t.Split(" ").Select(int.Parse).ToArray()));
+        return report.Zip(report.Skip(1)).All(t => Math.Abs(t.First - t.Second) is 1 or 2 or 3);
     }
 
-    public int Star2()
+    static bool ProblemDampener(int[] report)
     {
-        return 0;
+        return Enumerable.Range(0, report.Length).Any(removeIndex =>
+            IsReportSafe([.. report.Where((_, index) => index != removeIndex)]));
     }
+
+    public int Star1() => Input.Count(IsReportSafe);
+
+    public int Star2() => Input.Count(ProblemDampener);
 }
