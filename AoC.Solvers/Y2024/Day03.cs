@@ -15,7 +15,7 @@ public partial class Day03(string input) : IDay
     private static partial Regex RegexStar2();
 
     public int Star1() => RegexStar1().Matches(Input).Sum(t =>
-            t.Value.ExtraxtIntegers().Aggregate((a, b) => a * b));
+            t.Value.ExtractIntegers().Aggregate((a, b) => a * b));
 
     public int Star2()
     {
@@ -29,7 +29,7 @@ public partial class Day03(string input) : IDay
             else if (match.Contains("don't()"))
                 doMulti = false;
             else
-                sum += doMulti ? match.ExtraxtIntegers().Aggregate((a, b) => a * b) : 0;
+                sum += doMulti ? match.ExtractIntegers().Aggregate((a, b) => a * b) : 0;
         }
 
         return sum;
