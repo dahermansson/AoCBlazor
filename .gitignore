@@ -485,3 +485,5 @@ $RECYCLE.BIN/
 
 # Advent Of Code Inputs
 Inputs/
+
+appsettings.development.json
