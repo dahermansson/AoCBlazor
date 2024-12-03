@@ -69,4 +69,20 @@ public class Tests_2024
         var actor = new Day02(input);
         Assert.Equal(res, actor.Star2());
     }
+
+    [InlineData("xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))", 161)]
+    [Theory]
+    public void Day3_Star1(string input, int res)
+    {
+        var actor = new Day03(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))", 48)]
+    [Theory]
+    public void Day3_Star2(string input, int res)
+    {
+        var actor = new Day03(input);
+        Assert.Equal(res, actor.Star2());
+    }
 }
