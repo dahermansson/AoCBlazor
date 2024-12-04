@@ -85,4 +85,42 @@ public class Tests_2024
         var actor = new Day03(input);
         Assert.Equal(res, actor.Star2());
     }
+
+    [InlineData("""
+    MMMSXXMASM
+    MSAMXMSMSA
+    AMXSXMAAMM
+    MSAMASMSMX
+    XMASAMXAMM
+    XXAMMXXAMA
+    SMSMSASXSS
+    SAXAMASAAA
+    MAMMMXMMMM
+    MXMXAXMASX
+    """, 18)]
+    [Theory]
+    public void Day4_Star1(string input, int res)
+    {
+        var actor = new Day04(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+    MMMSXXMASM
+    MSAMXMSMSA
+    AMXSXMAAMM
+    MSAMASMSMX
+    XMASAMXAMM
+    XXAMMXXAMA
+    SMSMSASXSS
+    SAXAMASAAA
+    MAMMMXMMMM
+    MXMXAXMASX
+    """, 9)]
+    [Theory]
+    public void Day4_Star2(string input, int res)
+    {
+        var actor = new Day04(input);
+        Assert.Equal(res, actor.Star2());
+    }
 }
