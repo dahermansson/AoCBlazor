@@ -39,8 +39,9 @@ public class Day04(string input) : IDay
         }
 
         return Enumerable.Range(0, Input.Length).Sum(x =>
-                    Enumerable.Range(0, Input[0].Length).Sum(y =>
-                        CountXMAS((x, y))));
+                    Enumerable.Range(0, Input[0].Length).Sum(y => Input[x][y] == 'X' ?
+                        CountXMAS((x, y))
+                        : 0));
     }
 
     public int Star2()
@@ -85,7 +86,7 @@ public class Day04(string input) : IDay
             return false;
         }
 
-        return Enumerable.Range(0, Input.Length).Sum(x =>
-                    Enumerable.Range(0, Input[0].Length).Count(y => IsX_Mas((x, y))));
+        return Enumerable.Range(1, Input.Length-1).Sum(x =>
+                    Enumerable.Range(1, Input[0].Length-1).Count(y => Input[x][y] == 'A' && IsX_Mas((x, y))));
     }
 }
