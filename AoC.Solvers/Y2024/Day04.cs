@@ -66,7 +66,6 @@ public class Day04(string input) : IDay
                 if (x > -1 && x < Input.Length &&
                     y > -1 && y < Input[0].Length)
                         mas1 += Input[x][y];
-                
             }
 
             if (mas1 is "MAS" or "SAM")
