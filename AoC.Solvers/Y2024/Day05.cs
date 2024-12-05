@@ -6,7 +6,11 @@ public class Day05(string input) : IDay
     private List<List<int>> Updates { get; init; } = InputParsers.GetInputLines(input).Where(t => t.Contains(',')).Select(t => t.Split(',').Select(int.Parse).ToList()).ToList();
     private List<(int value, int before)> PageOrderingRules { get; init; } = InputParsers.GetInputLines(input).Where(t =>
         t.Contains('|'))
-            .Select(t => (value: t.ExtractIntegers().First(), before: t.ExtractIntegers().Last())).ToList();
+            .Select(t => 
+                { 
+                    var ints = t.ExtractIntegers();
+                    return (value: ints.First(), before: ints.Last());
+                }).ToList();
 
     private bool IsInRightOrder(List<int> update) => !update.Any(page => PageOrderingRules.Any(rule =>
                     rule.value == page
