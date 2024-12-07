@@ -9,14 +9,31 @@ public class Day07(string input) : IDay
 
     public int Star1()
     {
-        output = Input.Where(calibration => IsCalibrationTrue(calibration, 2)).Sum(t => t.TestValue).ToString();
+        output = Input.Where(calibration => IsCalibrationTrueRecStar1(calibration.TestValue, calibration.Numbers[0], calibration.Numbers[1..])).Sum(t => t.TestValue).ToString();
         return -1;
     }
 
     public int Star2()
     {
-        output = Input.Where(calibration => IsCalibrationTrue(calibration, 3)).Sum(t => t.TestValue).ToString();
+        output = Input.Where(calibration => IsCalibrationTrueRecStar2(calibration.TestValue, calibration.Numbers[0], calibration.Numbers[1..])).Sum(t => t.TestValue).ToString();
         return -1;
+    }
+
+    private static bool IsCalibrationTrueRecStar2(long testValue, long sum, long[] values)
+    {
+        if (values is []) return testValue == sum;
+        if (sum > testValue) return false;
+        return IsCalibrationTrueRecStar2(testValue, sum + values[0], values[1..])
+            || IsCalibrationTrueRecStar2(testValue, sum * values[0], values[1..])
+            || IsCalibrationTrueRecStar2(testValue, long.Parse($"{sum}{values[0]}"), values[1..]);
+    }
+
+    private static bool IsCalibrationTrueRecStar1(long testValue, long sum, long[] values)
+    {
+        if (values is []) return testValue == sum;
+        if (sum > testValue) return false;
+        return IsCalibrationTrueRecStar1(testValue, sum + values[0], values[1..])
+            || IsCalibrationTrueRecStar1(testValue, sum * values[0], values[1..]);
     }
 
     private bool IsCalibrationTrue(Calibration calibration, int numbersOfOperators)
