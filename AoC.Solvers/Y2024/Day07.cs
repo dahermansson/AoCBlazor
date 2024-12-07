@@ -9,7 +9,7 @@ public class Day07(string input) : IDay
 
     public int Star1()
     {
-        output = Input.Where(calibration => IsCalibrationTrue(calibration, 2)).Sum(t=> t.TestValue).ToString();
+        output = Input.Where(calibration => IsCalibrationTrue(calibration, 2)).Sum(t => t.TestValue).ToString();
         return -1;
     }
 
@@ -28,16 +28,16 @@ public class Day07(string input) : IDay
         foreach (var op in possibleOperators)
         {
             var sum = calibration.Numbers.First();
-            for(int i = 0; i < op.Length; i++)
+            for (int i = 0; i < op.Length; i++)
             {
-                if(op[i] == '+')
+                if (op[i] == operators[0])
                     sum += numbers[i];
-                else if(op[i] == '*')
+                else if (op[i] == operators[1])
                     sum *= numbers[i];
                 else
                     sum = long.Parse(string.Concat(sum, numbers[i]));
             }
-            if(sum == calibration.TestValue)
+            if (sum == calibration.TestValue)
                 return true;
         }
         return false;
