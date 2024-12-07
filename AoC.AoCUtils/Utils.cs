@@ -158,6 +158,8 @@ public static class Utils
     }
 
     public static IEnumerable<int> ExtractIntegers(this string s) => Regex.Matches(s, @"\d+").Where(t => t.Success).Select(t => int.Parse(t.Value));
+    
+    public static IEnumerable<long> ExtractLongs(this string s) => Regex.Matches(s, @"\d+").Where(t => t.Success).Select(t => long.Parse(t.Value));
 
     public static int ExtraxtInteger(this string s) => int.Parse(Regex.Match(s, @"-?\d+").Value);
     public static int ExtraxtPositivInteger(this string s) => int.Parse(Regex.Match(s, @"\d+").Value);
