@@ -235,4 +235,84 @@ public class Tests_2024
         var actor = new Day06(input);
         Assert.Equal(res, actor.Star2());
     }
+
+     [InlineData("""
+    190: 10 19
+    3267: 81 40 27
+    83: 17 5
+    156: 15 6
+    7290: 6 8 6 15
+    161011: 16 10 13
+    192: 17 8 14
+    21037: 9 7 18 13
+    292: 11 6 16 20
+    """, 3749)]
+    [Theory]
+    public void Day7_Star1(string input, int res)
+    {
+        var actor = new Day07(input);
+        _ = actor.Star1();
+        Assert.Equal(res.ToString(), actor.Output);
+    }
+
+    [InlineData("""
+    190: 10 19
+    3267: 81 40 27
+    83: 17 5
+    156: 15 6
+    7290: 6 8 6 15
+    161011: 16 10 13
+    192: 17 8 14
+    21037: 9 7 18 13
+    292: 11 6 16 20
+    """, 11387)]
+    [Theory]
+    public void Day7_Star2(string input, int res)
+    {
+        var actor = new Day07(input);
+        _ = actor.Star2();
+        Assert.Equal(res.ToString(), actor.Output);
+    }
+
+    [InlineData("""
+    ............
+    ........0...
+    .....0......
+    .......0....
+    ....0.......
+    ......A.....
+    ............
+    ............
+    ........A...
+    .........A..
+    ............
+    ............
+    """, 14)]
+    [Theory]
+    public void Day8_Star1(string input, int res)
+    {
+        var actor = new Day08(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+    ............
+    ........0...
+    .....0......
+    .......0....
+    ....0.......
+    ......A.....
+    ............
+    ............
+    ........A...
+    .........A..
+    ............
+    ............
+    """, 34)]
+    [Theory]
+    public void Day8_Star2(string input, int res)
+    {
+        var actor = new Day08(input);
+        Assert.Equal(res, actor.Star2());
+    }
 }
