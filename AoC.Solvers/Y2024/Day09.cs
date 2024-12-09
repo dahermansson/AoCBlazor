@@ -48,7 +48,7 @@ public class Day09(string input) : IDay
         {
             if (disk[indexToMove].Any(t => t == -1))
                 continue;
-                
+
             var newIndex = disk.FindIndex(t => t.Count(t => t == -1) >= disk[indexToMove].Count);
             if (newIndex > 0 && newIndex < indexToMove)
             {
