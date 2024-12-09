@@ -236,7 +236,7 @@ public class Tests_2024
         Assert.Equal(res, actor.Star2());
     }
 
-     [InlineData("""
+    [InlineData("""
     190: 10 19
     3267: 81 40 27
     83: 17 5
@@ -314,5 +314,23 @@ public class Tests_2024
     {
         var actor = new Day08(input);
         Assert.Equal(res, actor.Star2());
+    }
+
+    [InlineData("2333133121414131402", 1928)]
+    [Theory]
+    public void Day9_Star1(string input, int res)
+    {
+        var actor = new Day09(input);
+        _ = actor.Star1();
+        Assert.Equal(res.ToString(), actor.Output);
+    }
+
+    [InlineData("2333133121414131402", 2858)]
+    [Theory]
+    public void Day9_Star2(string input, int res)
+    {
+        var actor = new Day09(input);
+        _ = actor.Star2();
+        Assert.Equal(res.ToString(), actor.Output);
     }
 }
