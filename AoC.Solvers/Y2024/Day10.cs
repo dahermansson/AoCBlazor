@@ -12,16 +12,16 @@ public class Day10: IDay
 
     public int Star1()
     {
-        Input = InputParsers.GetInputLines("""
-        89010123
-        78121874
-        87430965
-        96549874
-        45678903
-        32019012
-        01329801
-        10456732
-        """);
+        //Input = InputParsers.GetInputLines("""
+        //89010123
+        //78121874
+        //87430965
+        //96549874
+        //45678903
+        //32019012
+        //01329801
+        //10456732
+        //""");
 
         int DFS(Pos start)
         {
@@ -41,6 +41,7 @@ public class Day10: IDay
                     res++;
                     continue;
                 }
+                visited.Add(current);
                 
                 foreach(var next in dir.Select(d => {
                     var x = current.X + d.X;
@@ -53,7 +54,6 @@ public class Day10: IDay
                     {
                         spots.Push(next);
                     }
-                visited.Add(current);
             }
             return res;
         }
@@ -65,6 +65,32 @@ public class Day10: IDay
 
     public int Star2()
     {
-        return 0;
+        IEnumerable<Pos> dir = [new (0,1), new (1,0), new (0,-1), new (-1, 0)];
+        int foundPaths = 0;
+        bool DfsR(Pos current, HashSet<Pos> visited, List<List<Pos>> paths)
+        {
+            if(visited == null)
+                visited=[];
+            if(Input[current.X][current.Y] == '9')
+                return true;
+            
+            visited.Add(current);
+            foreach(var next in dir.Select(d => {
+                    var x = current.X + d.X;
+                    var y = current.Y + d.Y;
+                    if(x < Input.Length && x > -1 && y < Input[0].Length && y > -1)
+                        return new Pos(x, y);
+                    else
+                        return null;
+                    }).Where(t => t != null && Input[t.X][t.Y] - Input[current.X][current.Y] == 1 && !visited.Contains(new (t.X, t.Y))))
+                    {
+                        if(DfsR(next, [..visited], paths))
+                            paths.Add([..visited, next]);
+                    }
+            return false;
+        }
+        var paths = new List<List<Pos>>();
+        Input.SelectMany((row, x) => row.Select((c, y) => (x, y, c) )).Where(t => t.c == '0').Select(t => new Pos(t.x, t.y)).ToList().ForEach(t => DfsR(t, [], paths));
+        return paths.Count;
     }
 }
