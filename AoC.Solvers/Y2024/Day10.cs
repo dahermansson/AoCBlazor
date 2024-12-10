@@ -1,96 +1,61 @@
-﻿using NetTopologySuite.Geometries;
+﻿namespace AoC.Solvers.Y2024;
 
-namespace AoC.Solvers.Y2024;
-
-public class Day10: IDay
+public class Day10(string input) : IDay
 {
-    public Day10(string input) => Input = InputParsers.GetInputLines(input);
     public string Output => throw new NotImplementedException();
 
-    private string[] Input {get; set;}
+    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
     private record Pos(int X, int Y);
+    private IEnumerable<Pos> Dir { get; init; } = [new(0, 1), new(1, 0), new(0, -1), new(-1, 0)];
+
+    private List<Pos> Trailheads { get; init; } = InputParsers.GetInputLines(input)
+        .SelectMany((row, x) => row.Select((c, y) => (x, y, c))).Where(t => t.c == '0').Select(t => new Pos(t.x, t.y)).ToList();
 
     public int Star1()
     {
-        //Input = InputParsers.GetInputLines("""
-        //89010123
-        //78121874
-        //87430965
-        //96549874
-        //45678903
-        //32019012
-        //01329801
-        //10456732
-        //""");
-
-        int DFS(Pos start)
+        int GetTrailheadScore(Pos trailhead)
         {
-            IEnumerable<Pos> dir = [new (0,1), new (1,0), new (0,-1), new (-1, 0)];
-            var res = 0;
-            var spots = new Stack<Pos>();
+            var score = 0;
             HashSet<Pos> visited = [];
-            spots.Push(start);
-            
-            while(spots.Count > 0)
+            var positions = new Stack<Pos>();
+            positions.Push(trailhead);
+
+            while (positions.Count != 0)
             {
-                var current = spots.Pop();
-                
-                if(Input[current.X][current.Y] == '9')
-                {
-                    visited.Add(current);
-                    res++;
-                    continue;
-                }
+                var current = positions.Pop();
                 visited.Add(current);
-                
-                foreach(var next in dir.Select(d => {
-                    var x = current.X + d.X;
-                    var y = current.Y + d.Y;
-                    if(x < Input.Length && x > -1 && y < Input[0].Length && y > -1)
-                        return new Pos(x, y);
-                    else
-                        return null;
-                    }).Where(t => t != null && Input[t.X][t.Y] - Input[current.X][current.Y] == 1 && !visited.Contains(new (t.X, t.Y))))
-                    {
-                        spots.Push(next);
-                    }
+
+                if (Input[current.X][current.Y] == '9')
+                    score++;
+
+                GetNeighbor(current)
+                    .Where(neighbor => Input[neighbor.X][neighbor.Y] - Input[current.X][current.Y] == 1
+                        && !visited.Contains(new(neighbor.X, neighbor.Y)))
+                        .ToList().ForEach(positions.Push);
             }
-            return res;
+            return score;
         }
 
-        return Input.SelectMany((row, x) => row.Select((c, y) => (x, y, c) )).Where(t => t.c == '0').Select(t => new Pos(t.x, t.y)).Sum(DFS);
+        return Trailheads.Sum(GetTrailheadScore);
     }
 
-
+    private IEnumerable<Pos> GetNeighbor(Pos current) =>
+        Dir.Select(d => new Pos(current.X + d.X, current.Y + d.Y)).Where(n => n.X < Input.Length && n.X > -1 && n.Y < Input[0].Length && n.Y > -1);
 
     public int Star2()
     {
-        IEnumerable<Pos> dir = [new (0,1), new (1,0), new (0,-1), new (-1, 0)];
-        int foundPaths = 0;
-        bool DfsR(Pos current, HashSet<Pos> visited, List<List<Pos>> paths)
+        void FindDistinctHikingTrails(Pos current, HashSet<Pos> visited, List<List<Pos>> hikingTrails)
         {
-            if(visited == null)
-                visited=[];
-            if(Input[current.X][current.Y] == '9')
-                return true;
-            
             visited.Add(current);
-            foreach(var next in dir.Select(d => {
-                    var x = current.X + d.X;
-                    var y = current.Y + d.Y;
-                    if(x < Input.Length && x > -1 && y < Input[0].Length && y > -1)
-                        return new Pos(x, y);
-                    else
-                        return null;
-                    }).Where(t => t != null && Input[t.X][t.Y] - Input[current.X][current.Y] == 1 && !visited.Contains(new (t.X, t.Y))))
-                    {
-                        if(DfsR(next, [..visited], paths))
-                            paths.Add([..visited, next]);
-                    }
-            return false;
+            if (Input[current.X][current.Y] == '9')
+                hikingTrails.Add([.. visited]);
+
+            GetNeighbor(current).Where(t => t != null && Input[t.X][t.Y] - Input[current.X][current.Y] == 1 && !visited.Contains(new(t.X, t.Y))).ToList().ForEach(next =>
+                FindDistinctHikingTrails(next, [.. visited], hikingTrails));
         }
-        var paths = new List<List<Pos>>();
-        Input.SelectMany((row, x) => row.Select((c, y) => (x, y, c) )).Where(t => t.c == '0').Select(t => new Pos(t.x, t.y)).ToList().ForEach(t => DfsR(t, [], paths));
-        return paths.Count;
+
+        var hikingTrails = new List<List<Pos>>();
+        Trailheads.ForEach(t => FindDistinctHikingTrails(t, [], hikingTrails));
+        return hikingTrails.Count;
     }
 }

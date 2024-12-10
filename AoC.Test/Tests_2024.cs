@@ -333,4 +333,38 @@ public class Tests_2024
         _ = actor.Star2();
         Assert.Equal(res.ToString(), actor.Output);
     }
+
+    [InlineData("""
+    89010123
+    78121874
+    87430965
+    96549874
+    45678903
+    32019012
+    01329801
+    10456732
+    """, 36)]
+    [Theory]
+    public void Day10_Star1(string input, int res)
+    {
+        var actor = new Day10(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+    89010123
+    78121874
+    87430965
+    96549874
+    45678903
+    32019012
+    01329801
+    10456732
+    """, 81)]
+    [Theory]
+    public void Day10_Star2(string input, int res)
+    {
+        var actor = new Day10(input);
+        Assert.Equal(res, actor.Star2());
+    }
 }
