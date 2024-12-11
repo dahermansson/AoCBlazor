@@ -1,51 +1,59 @@
 ﻿namespace AoC.Solvers.Y2024;
 
-public class Day11: IDay
+public class Day11(string input) : IDay
 {
-    public Day11(string input) => Input = input.Split(' ').Select(long.Parse).ToList();
-    public string Output => throw new NotImplementedException();
-
-    private List<long> Input {get; set;}
+    public string Output => output;
+    private string output = string.Empty;
+    private List<long> Input { get; set; } = input.Split(' ').Select(long.Parse).ToList();
 
     public int Star1()
     {
-        List<long> numbers = [..Input];
-        List<(int loop, int count)> counts = [(0, numbers.Count)];
-        for (int i = 0; i< 25;i++)
+        List<long> numbers = [.. Input];
+        for (int i = 0; i < 25; i++)
         {
-        numbers = numbers.Aggregate(new List<long>(), (a, b) => {
-            if(b == 0)
-                a.Add(1);
-            else if(b.ToString().Length % 2 == 0)
+            numbers = numbers.Aggregate(new List<long>(), (a, b) =>
             {
-                var s = b.ToString();
-                var first = s[..(s.Length / 2)];
-                var secound = s[(s.Length/2)..];                
-                a.AddRange([long.Parse(first), long.Parse(secound)]);
-            }
-            else
-                a.Add(b * 2024);
-            return a;
-        });
-        counts.Add((i, numbers.Count));
+                if (b == 0)
+                    a.Add(1);
+                else if (b.ToString().Length % 2 == 0)
+                {
+                    var s = b.ToString();
+                    var first = long.Parse(s[..(s.Length / 2)]);
+                    var secound = long.Parse(s[(s.Length / 2)..]);
+                    a.AddRange([first, secound]);
+                }
+                else
+                    a.Add(b * 2024);
+                return a;
+            });
         }
 
-        counts.ForEach(t => Console.WriteLine(t));
         return numbers.Count;
     }
 
     public int Star2()
     {
-        List<long> numbers = [..Input];
-        
-        long zeros = numbers.Count(c => c ==0 );
-        long splits = numbers.Count(c => c.ToString().Length % 2 ==0 );
-        long multiply = numbers.Count(c => c > 0 && c.ToString().Length % 2 != 0);
-        long total = zeros + splits + multiply;
-        for (int i = 0; i< 25;i++)
+        Dictionary<long, long> numbers = Input.ToDictionary(key => key, value => (long)1);
+        for (int i = 0; i < 75; i++)
         {
-            
+            numbers = numbers.Aggregate(new Dictionary<long, long>(), (a, b) =>
+            {
+                if (b.Key == 0)
+                    a[1] = a.TryGetValue(1, out long curentZeros) ? curentZeros + b.Value : b.Value;
+                else if (b.Key.ToString().Length % 2 == 0)
+                {
+                    var s = b.Key.ToString();
+                    var first = long.Parse(s[..(s.Length / 2)]);
+                    var secound = long.Parse(s[(s.Length / 2)..]);
+                    a[first] = a.TryGetValue(first, out long currentFirst) ? currentFirst + b.Value : b.Value;
+                    a[secound] = a.TryGetValue(secound, out long currentSecound) ? currentSecound + b.Value : b.Value;
+                }
+                else
+                    a[b.Key * 2024] = a.TryGetValue(b.Key * 2024, out long currentOther) ? currentOther + b.Value : b.Value;
+                return a;
+            });
         }
-        return 0;
+        output = numbers.Sum(t => t.Value).ToString();
+        return -1;
     }
 }
