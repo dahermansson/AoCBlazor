@@ -13,7 +13,7 @@ var host = Host.CreateDefaultBuilder(args)
     .Build();
 
 const int YEAR = SolversManager.Y2024;
-string dayToRun = 11.ToString("D2");
+string dayToRun = 12.ToString("D2");
 
 using var scope = host.Services.CreateScope();
 var solverManager = scope.ServiceProvider.GetRequiredService<SolversManager>();
