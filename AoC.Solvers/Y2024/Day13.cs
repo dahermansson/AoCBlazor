@@ -39,7 +39,7 @@ public class Day13(string input) : IDay
             if (((ButtonA.x * numbersOfA) + (ButtonB.x * numbersOfB)) != Prize.x || ((ButtonA.y * numbersOfA) + (ButtonB.y * numbersOfB)) != Prize.y)
                 return 0;
 
-            return (numbersOfA * 3) + (numbersOfB * 1);
+            return numbersOfA * 3 + numbersOfB;
         }
     }
 
