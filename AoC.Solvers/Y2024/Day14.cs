@@ -6,12 +6,10 @@ public class Day14(string input) : IDay
 {
     record Robot((int X, int Y) Pos, (int Vx, int Vy) Vel, int MaxX, int MaxY)
     {
-        public Robot NextPos()
+        public Robot NextPos(int seconds = 1)
         {
-            var nextX = Pos.X + Vel.Vx;
-            var x = ((nextX % MaxX) + MaxX) % MaxX;
-            var nextY = Pos.Y + Vel.Vy;
-            var y = ((nextY % MaxY) + MaxY) % MaxY;
+            var x = (Pos.X + Vel.Vx * seconds).GetWrappingIndex(MaxX);
+            var y = (Pos.Y + Vel.Vy * seconds).GetWrappingIndex(MaxY);
             return this with { Pos = (x, y) };
         }
     }
@@ -29,14 +27,9 @@ public class Day14(string input) : IDay
         var robots = Input.Select(i =>
         {
             var values = i.ExtractIntegers().ToList();
-            return new Robot((values[0], values[1]), (values[2], values[3]), Width, Height);
-        }).ToArray();
-
-        for (int i = 0; i < 100; i++)
-        {
-            robots = robots.Select(t => t.NextPos()).ToArray();
-        }
-
+            return new Robot((values[0], values[1]), (values[2], values[3]), Width, Height).NextPos(100);
+        });
+    
         var xMax = Width;
         var xMid = Width / 2;
         var yMax = Height;
@@ -72,7 +65,7 @@ public class Day14(string input) : IDay
         {
             robots = robots.Select(t => t.NextPos()).ToArray();
             seconds++;
-
+            
             //Lines with more then 10 robots
             //to a dic with line (y) as key and hash of the lines all robots x value
             var linesToCheck = robots.GroupBy(t => t.Pos.Y).Where(t => t.Count() > 10)
@@ -87,6 +80,15 @@ public class Day14(string input) : IDay
                 }
             }
         }
+        
+    }
+
+    string CreateLine(HashSet<int> lineRobotsHash)
+    {
+        var chars = new char[Width];
+        for (int x = 0; x < Width; x++)
+            chars[x] = lineRobotsHash.Contains(x) ? '#' : '.';
+        return new(chars);
     }
 
     string PlotMap(Robot[] robots)
@@ -99,15 +101,5 @@ public class Day14(string input) : IDay
             sb.AppendLine();
         }
         return sb.ToString();
-    }
-
-    string CreateLine(HashSet<int> lineRobotsHash)
-    {
-        var chars = new char[Width];
-        for (int x = 0; x < Width; x++)
-        {
-            chars[x] = lineRobotsHash.Contains(x) ? '#' : '.';
-        }
-        return new(chars);
     }
 }
