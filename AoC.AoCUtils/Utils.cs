@@ -157,7 +157,7 @@ public static class Utils
         return res;
     }
 
-    public static IEnumerable<int> ExtractIntegers(this string s) => Regex.Matches(s, @"\d+").Where(t => t.Success).Select(t => int.Parse(t.Value));
+    public static IEnumerable<int> ExtractIntegers(this string s) => Regex.Matches(s, @"-?\d+").Where(t => t.Success).Select(t => int.Parse(t.Value));
     
     public static IEnumerable<long> ExtractLongs(this string s) => Regex.Matches(s, @"\d+").Where(t => t.Success).Select(t => long.Parse(t.Value));
 
