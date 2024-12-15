@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace AoC.AoCUtils;
 
 public static class Extensions
@@ -27,4 +29,19 @@ public static class Extensions
     /// <param name="arrayLength"></param>
     /// <returns></returns>
     public static int GetWrappingIndex(this int value, int arrayLength) => ((value % arrayLength) + arrayLength) % arrayLength;
+
+    public static string ToPrintableString(this Dictionary<(int X, int Y), char> values)
+    {
+        var sb = new StringBuilder();
+        var rowsIndex = values.Keys.Max(t => t.X)+1;
+        var colIndex = values.Keys.Max(t => t.Y)+1;
+        for (int x = 0; x < rowsIndex; x++)
+        {
+            for (int y = 0; y < colIndex; y++)
+                sb.Append(values[(x, y)]);
+            sb.AppendLine();
+        }
+        sb.AppendLine();
+        return sb.ToString();
+    }
 }
