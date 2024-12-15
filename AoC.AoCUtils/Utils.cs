@@ -175,6 +175,29 @@ public static class Utils
         }
     }
 
+    public static void Print(this Span2D<char> span2D)
+    {
+        for (int i = 0; i < span2D.Height; i++)
+        {
+            var row = span2D.GetRowSpan(i);
+            for(int p = 0; p < row.Length;p++)
+                Console.Write(row[p]);
+            Console.WriteLine();
+        }
+    }
+
+    public static void Span2DToConsoleOutput<T>(this Span2D<T> span2D)
+    {
+        Console.WriteLine();
+        for (int i = 0; i < span2D.Height; i++)
+        {
+            var row = span2D.GetRowSpan(i);
+            for(int p = 0; p < row.Length;p++)
+                Console.Write(row[p]);
+            Console.WriteLine();
+        }
+    }
+
     public static string Output(this Span2D<bool> span2D)
     {
         var sb = new StringBuilder();
