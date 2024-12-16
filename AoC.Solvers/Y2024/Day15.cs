@@ -163,7 +163,8 @@ public class Day15(string input) : IDay
         {
             currentPosition = Move(currentPosition, move);
         }
-        Console.WriteLine(warehouse.ToPrintableString());
+        //Console.WriteLine(warehouse.ToPrintableString());
+
         return warehouse.Where(t => t.Value == 'O').Sum(t => 100 * t.Key.X + t.Key.Y);
     }
 }
