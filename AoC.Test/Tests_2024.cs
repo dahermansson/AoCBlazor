@@ -456,4 +456,32 @@ public class Tests_2024
         Assert.Equal(res, actor.Star1());
     }
 
+    [InlineData("""
+    Register A: 729
+    Register B: 0
+    Register C: 0
+
+    Program: 0,1,5,4,3,0
+    """, "4,6,3,5,6,3,5,2,1,0")]
+    [InlineData("""
+    Register A: 10
+    Register B: 0
+    Register C: 0
+
+    Program: 5,0,5,1,5,4
+    """, "0,1,2")]
+    [InlineData("""
+    Register A: 2024
+    Register B: 0
+    Register C: 0
+
+    Program: 0,1,5,4,3,0
+    """, "4,2,5,6,7,7,7,7,3,1,0")]
+    [Theory]
+    public void Day17_Star1(string input, string res)
+    {
+        var actor = new Day17(input);
+        _ = actor.Star1();
+        Assert.Equal(res, actor.Output);
+    }
 }
