@@ -484,4 +484,43 @@ public class Tests_2024
         _ = actor.Star1();
         Assert.Equal(res, actor.Output);
     }
+
+    [InlineData("""
+    r, wr, b, g, bwu, rb, gb, br
+
+    brwrr
+    bggr
+    gbbr
+    rrbgbr
+    ubwu
+    bwurrg
+    brgr
+    bbrgwb
+    """, 6)]
+    [Theory]
+    public void Day19_Star1(string input, int res)
+    {
+        var actor = new Day19(input);
+        Assert.Equal(res, actor.Star1());
+    }
+
+    [InlineData("""
+    r, wr, b, g, bwu, rb, gb, br
+
+    brwrr
+    bggr
+    gbbr
+    rrbgbr
+    ubwu
+    bwurrg
+    brgr
+    bbrgwb
+    """, "16")]
+    [Theory]
+    public void Day19_Star2(string input, string res)
+    {
+        var actor = new Day19(input);
+        _ = actor.Star2();
+        Assert.Equal(res, actor.Output);
+    }
 }

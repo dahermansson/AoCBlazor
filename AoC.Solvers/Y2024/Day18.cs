@@ -16,12 +16,38 @@ public class Day18(string input) : IDay
 
     public int Star2()
     {
-        var chunk = Enumerable.Range(0, Input.Count).Chunk(300).SkipWhile(chunk => AStar(chunk.Last()) is > -1).Take(1).First();
-        var blockingByte = Input[chunk.TakeWhile(i => AStar(i) is > -1).Last()];
+        var chunk = Enumerable.Range(0, Input.Count).Chunk(300).SkipWhile(chunk => AStar(chunk.Last()) is > 0).Take(1).First();
+        var blockingByte = Input[chunk.TakeWhile(i => AStar(i) is > 0).Last()];
 
         output = $"{blockingByte.X},{blockingByte.Y}";
         return -1;
     }
+
+    private int BFS(int fallenBytes)
+    {
+        var memory = Input.Take(fallenBytes).ToHashSet();
+        var boundary = new Boundary(70, 70);
+        var start = new Pos(0, 0);
+        var goal = new Pos(boundary.XMax, boundary.YMax);
+
+        var queue = new Queue<(Pos Pos, int Dist)>();
+        queue.Enqueue((start, 0));
+        HashSet<Pos> seen = [start];
+        while (queue.Count > 0)
+        {
+            var c = queue.Dequeue();
+            if(c.Pos == goal)
+                return c.Dist;
+            seen.Add(c.Pos);
+            foreach(var p in Dir.Select(d => new Pos(c.Pos.X + d.X, c.Pos.Y + d.Y)).Where(t => boundary.InBoundary(t) && !memory.Contains(t) && !seen.Contains(t)).ToArray())
+            {
+                if(!queue.Any(t => t.Pos == p))
+                    queue.Enqueue((p, c.Dist+1));
+            }
+        }
+        return 0;
+    }
+
     private int AStar(int fallenBytes)
     {
         var boundary = new Boundary(70, 70);
@@ -62,6 +88,6 @@ public class Day18(string input) : IDay
                 }
             }
         }
-        return -1;
+        return 0;
     }
 }

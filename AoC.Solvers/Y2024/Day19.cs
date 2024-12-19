@@ -43,13 +43,13 @@ public class Day19(string input) : IDay
                 else
                 {
                     known = ValidCount(next);
-                    total += known;
                     d.Add(next, known);
+                    total += known;
                 }
             }
             return total;
         }
-        var t = Input.Skip(2).Sum(t => ValidCount(t));
+        var t = Input.Skip(2).Sum(ValidCount);
         output = t.ToString();
         return -1;
     }
