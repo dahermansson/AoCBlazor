@@ -4,8 +4,7 @@ public class Day20(string input) : IDay
 {
     public string Output => throw new NotImplementedException();
 
-    private string[] Input { get; set; } = InputParsers.GetInputLines(input);
-    private Dictionary<Pos, char> Maze = InputParsers.GetInputLines(input).SelectMany((t, x) => t.Select((r, y) => (pos: new Pos(x, y), value: r))).ToDictionary(key => key.pos, v => v.value);
+    private readonly Dictionary<Pos, char> Maze = InputParsers.GetInputLines(input).SelectMany((t, x) => t.Select((r, y) => (pos: new Pos(x, y), value: r))).ToDictionary(key => key.pos, v => v.value);
 
     private record Pos(int X, int Y);
     private readonly List<Pos> Dirs = [new Pos(-1, 0), new Pos(0, 1), new Pos(1, 0), new Pos(0, -1)];
@@ -15,13 +14,7 @@ public class Day20(string input) : IDay
         var end = Maze.Single(t => t.Value == 'E').Key;
 
         var noCheatPath = GetPath(start, end);
-        List<int> foundCheat = [];
-        foreach (var cheatStart in noCheatPath)
-        {
-            foundCheat.AddRange(GetShortcuts(cheatStart.Key, 2, noCheatPath).Select(t => t.Value));
-        }
-
-        return foundCheat.Count(t => t >= 100);
+        return noCheatPath.SelectMany(t => GetShortcuts(t.Key, 2, noCheatPath)).Where(t => t.Value >=100).Count();
     }
 
     public int Star2()
@@ -30,15 +23,7 @@ public class Day20(string input) : IDay
         var end = Maze.Single(t => t.Value == 'E').Key;
 
         var noCheatPath = GetPath(start, end);
-        List<int> foundCheat = [];
-        
-        foreach (var cheatStart in noCheatPath)
-        {
-            if(cheatStart.Value + Utils.ManhattanDistance(cheatStart.Key.X, end.X, cheatStart.Key.Y, end.Y) < noCheatPath[end] - 100)
-                foundCheat.AddRange(GetShortcuts(cheatStart.Key, 20, noCheatPath).Select(t => t.Value));
-        }
-
-        return foundCheat.Count(t => t >= 100);
+        return noCheatPath.SelectMany(t => GetShortcuts(t.Key, 20, noCheatPath)).Where(t => t.Value >=100).Count();
     }
 
     Dictionary<Pos, int> GetPath(Pos start, Pos end)
@@ -87,7 +72,7 @@ public class Day20(string input) : IDay
             }
 
             var neighbors = new List<Pos>();
-            
+
             if (current.CheatStepsTaken < maxCheatSteps - 1)
                 neighbors = Dirs.Select(d => new Pos(current.Pos.X + d.X, current.Pos.Y + d.Y)).Where(t => Maze.TryGetValue(t, out char c) && c == '#' && !seen.Contains(t)).ToList();
 
