@@ -53,7 +53,7 @@ public class Day22(string input) : IDay
                 if (seen.Contains(sequence))
                     continue;
 
-                sequences.TryGetValue(sequence, out var value);
+                _ = sequences.TryGetValue(sequence, out var value);
                 sequences[sequence] = value + t.Price.Bananas;
                 seen.Add(sequence);
             }
