@@ -12,7 +12,7 @@ public class Day22(string input) : IDay
     private static long Op1(long secret) => Prun(Mix(secret, secret * 64));
     private static long Op2(long secret) => Prun(Mix(secret, secret / 32));
     private static long Op3(long secret) => Prun(Mix(secret, secret * 2048));
-    
+
     private static long GetSecretNumber(long secret)
     {
         secret = Op1(secret);
@@ -47,7 +47,7 @@ public class Day22(string input) : IDay
         void PriceOnChanges((int Bananas, int Diff)[] prices)
         {
             HashSet<(int a, int b, int c, int d)> seen = [];
-            foreach(var t in prices.Select((Price, Index) => (Price, Index)).Skip(4))
+            foreach (var t in prices.Select((Price, Index) => (Price, Index)).Skip(4))
             {
                 var sequence = (prices[t.Index - 3].Diff, prices[t.Index - 2].Diff, prices[t.Index - 1].Diff, prices[t.Index].Diff);
                 if (seen.Contains(sequence))
