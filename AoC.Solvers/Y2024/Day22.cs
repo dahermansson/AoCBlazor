@@ -24,7 +24,7 @@ public class Day22(string input) : IDay
     {
         yield return ((int)(secretNumber % 10), 0);
         var prevSecretNumber = secretNumber;
-        for (var i = 1; i < 2000; i++)
+        for (var i = 1; i < 2000; i++) //First number is yield before the loop
         {
             secretNumber = GetSecretNumber(secretNumber);
 
@@ -37,7 +37,7 @@ public class Day22(string input) : IDay
 
     public int Star1()
     {
-        output = Input.Sum(t => Enumerable.Range(0, 2000).Aggregate(t, (a, b) => GetSecretNumber(a))).ToString();
+        output = Input.Sum(initialSecret => Enumerable.Range(0, 2000).Aggregate(initialSecret, (secretNumber, _) => GetSecretNumber(secretNumber))).ToString();
         return -1;
     }
 
