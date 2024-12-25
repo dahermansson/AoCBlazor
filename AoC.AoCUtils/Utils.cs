@@ -92,6 +92,17 @@ public static class Utils
         return BitConverter.ToInt64(bArray, 0);
     }
 
+    public static long ToInt64(this BitArray bits)
+    {
+        var temp = new BitArray(bits.Length);
+        int index = 0;
+        for (int i = 0; i < bits.Length; i++)
+            temp[index++] = bits[i];
+        var bArray = new byte[8];
+        temp.CopyTo(bArray, 0);
+        return BitConverter.ToInt64(bArray, 0);
+    }
+
     public static string Print(this BitArray bits)
     {
         StringBuilder sb = new();
