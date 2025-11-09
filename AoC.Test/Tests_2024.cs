@@ -189,7 +189,7 @@ public class Tests_2024
     75,29,13
     75,97,47,61,53
     61,13,29
-    97,13,75,29,47q
+    97,13,75,29,47
     """, 123)]
     [Theory]
     public void Day5_Star2(string input, int res)
