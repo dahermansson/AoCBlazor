@@ -22,7 +22,7 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: dotnet publish
-        run: dotnet publish ".\AoC.Web" -c Release -o "${{env.DOTNET_ROOT}}\\AoC.Web"
+        run: dotnet publish ".\AoC.Web" -c Release -o "${{env.DOTNET_ROOT}}\AoC.Web"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v5
