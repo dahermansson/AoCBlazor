@@ -33,7 +33,6 @@ public class Day13(string input) : IDay
             else
                 FoldLeft(paper, fold.fold);
 
-        ImageHandler.CreatImageFromMatrix(paper, "13.jpg", '#');
         return 1;
     }
 

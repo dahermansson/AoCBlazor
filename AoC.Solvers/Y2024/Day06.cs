@@ -14,6 +14,7 @@ public class Day06(string input) : IDay
         var currentDir = 0;
         var current = Start;
         HashSet<(int x, int y, int dir)> positions = [current];
+        
         while (true)
         {
             var possibleNext = (x: current.x + Dir[currentDir].x, y: current.y + Dir[currentDir].y);
@@ -34,5 +35,10 @@ public class Day06(string input) : IDay
     }
 
     public int Star1() => GetGuardsPath().Count;
-    public int Star2() => GetGuardsPath().Count(IsBlockCreatingLoop);
+    public int Star2()
+    {
+        var t = GetGuardsPath().Count(IsBlockCreatingLoop);
+
+        return t;
+    }
 }

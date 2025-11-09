@@ -3,6 +3,7 @@
 public class Day25(string input) : IDay
 {
     public string Output => throw new NotImplementedException();
+    private readonly string Input = input;
 
     private IEnumerable<(int[] Pins, bool IsLock)> LocksAndKeys { get; set; } = input.Split($"{Environment.NewLine}{Environment.NewLine}").Select(g =>
         {
