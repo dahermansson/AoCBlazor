@@ -79,5 +79,4 @@ public partial class Puzzles: ComponentBase
         Star2Button = "[Run]";
         Star2ButtonStatus = false;
     }
-
 }
