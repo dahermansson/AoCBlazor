@@ -33,8 +33,8 @@ public class Day02(string input) : IDay
             
                 return Enumerable.Range(1, l).Any(c => 
                 {
-                    var chunks = t.Chunk(c).Select(p => int.Parse(string.Concat(p)));
-                    return chunks.Skip(1).All(p => p == chunks.First());
+                    var chunks = t.Chunk(c).Select(p => string.Concat(p)).ToArray();
+                    return chunks.Skip(1).All(p => p == chunks[0]);
                 });
             }).ToList();
 
