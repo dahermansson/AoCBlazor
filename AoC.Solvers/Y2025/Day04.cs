@@ -26,11 +26,11 @@ public class Day04(string input) : IDay
     }
 
     public int Star1() => 
-        AccessedByAForklift([..Input.Select(row => row.Select(col => col).ToArray())]).Count;
+        AccessedByAForklift([..Input.Select(row => row.ToCharArray())]).Count;
         
     public int Star2()
     {
-        char[][] grid = [.. Input.Select(row => row.Select(col => col).ToArray())];
+        char[][] grid = [.. Input.Select(row => row.ToCharArray())];
 
         while (AccessedByAForklift(grid) is { Count: > 0 } accessedByAForklift)
             accessedByAForklift.ForEach(f => grid[f.Row][f.Col] = 'x');
