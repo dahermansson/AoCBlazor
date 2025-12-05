@@ -32,20 +32,14 @@ public class Day05(string input) : IDay
         HashSet<Range> used = [];
         while (freshIngredients.Any(i => !used.Contains(i)))
         {
-            var range = freshIngredients.Where(t => !used.Contains(t)).First();
-            used.Add(range);
-
-            ranges.Add(freshIngredients.Where(t => !used.Contains(t)).Aggregate(range, (current, next) =>
+            ranges.Add(freshIngredients.Where(t => !used.Contains(t)).Aggregate((current, next) =>
             {
-                if (current.Overlapp(next))
+                used.Add(current);
+                if (current.Overlapp(next) || current.Includes(next))
                 {
                     used.Add(next);
-                    return current with { To = next.To };
+                    return current.To < next.To ? current with { To = next.To } : current;
                 }
-
-                if (current.Includes(next))
-                    used.Add(next);
-
                 return current;
             }));
         }
