@@ -65,7 +65,7 @@ public class GraphPathFinding<T> where T : notnull
     public (Dictionary<T, int> costs, Dictionary<T, T> paths) Dijkstra(Dictionary<T, List<T>> graph, T start, CostDelegate costFunc)
     {
         if(start == null)
-            throw new ArgumentNullException("start");
+            throw new ArgumentNullException(nameof(start));
         var costs = new Dictionary<T, int>();
         var candidates = new Stack<T>();
         var visited = new HashSet<T>();

@@ -13,9 +13,9 @@ public class Day09(string input) : IDay
 
     public int Star1()
     {
-        var koordinates = InputParsers.GetInputLines(Input).Select(t => new Point(long.Parse(t.Split(',')[0]), long.Parse(t.Split(',')[1])));
+        var koordinates = InputParsers.GetInputLines(Input).Select(t => new AoCUtils.Point(int.Parse(t.Split(',')[0]), int.Parse(t.Split(',')[1])));
         var pairs = koordinates.Select((p1, i) => koordinates.Skip(i + 1).Select(p2 => (p1, p2))).SelectMany(t => t);
-        var bigestSquare = pairs.Max(t => (Math.Abs(t.p1.X - t.p2.X) + 1) * (Math.Abs(t.p1.Y - t.p2.Y) + 1));
+        var bigestSquare = pairs.Max(t => (Math.Abs((long)t.p1.X - t.p2.X) + 1) * (Math.Abs((long)t.p1.Y - t.p2.Y) + 1));
         _output = bigestSquare.ToString();
         return -1;
     }
@@ -34,8 +34,7 @@ public class Day09(string input) : IDay
         _output = ((Math.Abs(p1.X - p2.X) + 1) * (Math.Abs(p1.Y - p2.Y) + 1)).ToString();
         return -1;
     }
-
-    record Point(long X, long Y);
+    
     record CoordinatesPair(Coordinate Coordinate1, Coordinate Coordinate2)
     {
         public Coordinate[] BBox => [
