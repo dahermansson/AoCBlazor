@@ -16,12 +16,11 @@ public class Day10(string input) : IDay
                 splits.Skip(1).SkipLast(1).Select(b =>
                 {
                     var ints = b.Trim('(', ')');
-                    return new Button(ints.Split(',').Select(int.Parse).ToList(), 0, Enumerable.Range(0, leds.Length).Select(t => false).ToArray());//new string('.', leds.Length));
+                    return new Button(ints.Split(',').Select(int.Parse).ToList(), 0, Enumerable.Range(0, leds.Length).Select(t => false).ToArray(), []);//new string('.', leds.Length));
                 }).ToList());
         });
 
-        var t = machines.Select(PressButtons).ToList();
-        return t.Sum();
+        return machines.Select(PressButtons).Sum();
     }
 
     private int PressButtons(Machine machine)
@@ -34,8 +33,8 @@ public class Day10(string input) : IDay
         {
             currentButton = buttons.Dequeue();
             currentButton = currentButton.Press();
-            machine.Buttons.Where(t => !t.Wires.SequenceEqual(currentButton.Wires))
-                .Select(b => b with { Leds = currentButton.Leds, Presses = currentButton.Presses })
+            machine.Buttons.Where(t => !currentButton.PressedButtons.Contains(t.ButtonIdentifier))
+                .Select(b => b with { Leds = currentButton.Leds, Presses = currentButton.Presses, PressedButtons = [..currentButton.PressedButtons] })
                 .ToList()
                 .ForEach(buttons.Enqueue);
         }
@@ -49,12 +48,15 @@ public class Day10(string input) : IDay
     }
 
     public record Machine(bool[] Leds, List<Button> Buttons);
-    public record Button(List<int> Wires, int Presses, bool[] Leds)
+    public record Button(List<int> Wires, int Presses, bool[] Leds, HashSet<string> PressedButtons)
     {
         public Button Press()
         {
-            return this with { Presses = Presses + 1, Leds = SwitchLeds() };
+            return this with { Presses = Presses + 1, Leds = SwitchLeds(), PressedButtons = [..PressedButtons, ButtonIdentifier] };
         }
+
+        public string ButtonIdentifier => string.Concat(Wires);
+
         private bool[] SwitchLeds()
         {
             bool[] b = new bool[Leds.Length];
