@@ -1,4 +1,6 @@
-﻿namespace AoC.Solvers.Y2025;
+﻿using Microsoft.Z3;
+
+namespace AoC.Solvers.Y2025;
 
 public class Day10(string input) : IDay
 {
@@ -34,17 +36,56 @@ public class Day10(string input) : IDay
             currentButton = buttons.Dequeue();
             currentButton = currentButton.Press();
             machine.Buttons.Where(t => !currentButton.PressedButtons.Contains(t.ButtonIdentifier))
-                .Select(b => b with { Leds = currentButton.Leds, Presses = currentButton.Presses, PressedButtons = [..currentButton.PressedButtons] })
+                .Select(b => b with { Leds = currentButton.Leds, Presses = currentButton.Presses, PressedButtons = [.. currentButton.PressedButtons] })
                 .ToList()
                 .ForEach(buttons.Enqueue);
         }
         return currentButton?.Presses ?? 0;
     }
 
-
     public int Star2()
     {
-        return 0;
+        int sum = 0;
+        foreach (var machineLine in Input)
+        {
+            var machine = machineLine.Split(" ");
+            var buttons = machine[1..^1].Select(p => p.Where(char.IsDigit).Select(i => int.Parse(i.ToString())).ToList()).ToList();
+            var joltages = machine.Last().Trim('{', '}').Split(',').Select(i => int.Parse(i.ToString())).ToList();
+
+
+            var context = new Context();
+            var optimizer = context.MkOptimize();
+
+            var z3Buttons = new ArithExpr[buttons.Count];
+            for (var i = 0; i < buttons.Count; ++i)
+            {
+                z3Buttons[i] = context.MkIntConst($"button_{i}");
+                optimizer.Add(context.MkGe(z3Buttons[i], context.MkInt(0)));
+            }
+
+            foreach (var joltage in joltages.Index())
+            {
+                List<ArithExpr> buttonToPresse = [];
+                var buttons_affecting_joltage = buttons.Index().Where(t => t.Item.Contains(joltage.Index)).ToList();
+                buttons_affecting_joltage.ForEach(button => buttonToPresse.Add(z3Buttons[button.Index]));
+
+                var sumPressedButtons = buttonToPresse.Count == 1
+                        ? buttonToPresse[0]
+                        : context.MkAdd([.. buttonToPresse]);
+
+                optimizer.Add(context.MkEq(sumPressedButtons, context.MkInt(joltage.Item)));
+            }
+
+            var totalPressCount = context.MkAdd(z3Buttons);
+
+            optimizer.MkMinimize(totalPressCount);
+
+            var status = optimizer.Check();
+            var evaluatedTotalPressCount = optimizer.Model.Evaluate(totalPressCount);
+            sum += ((IntNum)evaluatedTotalPressCount).Int;
+        }
+
+        return sum;
     }
 
     public record Machine(bool[] Leds, List<Button> Buttons);
@@ -52,7 +93,7 @@ public class Day10(string input) : IDay
     {
         public Button Press()
         {
-            return this with { Presses = Presses + 1, Leds = SwitchLeds(), PressedButtons = [..PressedButtons, ButtonIdentifier] };
+            return this with { Presses = Presses + 1, Leds = SwitchLeds(), PressedButtons = [.. PressedButtons, ButtonIdentifier] };
         }
 
         public string ButtonIdentifier => string.Concat(Wires);

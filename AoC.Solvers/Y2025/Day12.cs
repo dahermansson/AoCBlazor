@@ -19,8 +19,5 @@ public class Day12(string input) : IDay
         }).Count(tree => tree.treeRegionSize > tree.presentsTotalSize);
     }
 
-    public int Star2()
-    {
-        return 21;
-    }
+    public int Star2() => 22;
 }
