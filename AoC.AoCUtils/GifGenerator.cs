@@ -1,3 +1,4 @@
+/*
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
@@ -21,3 +22,4 @@ public class GifGenerator()
         gif.SaveAsGif(filename);
     }
 }
+*/

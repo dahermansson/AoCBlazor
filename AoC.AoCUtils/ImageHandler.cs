@@ -1,3 +1,4 @@
+/*
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
@@ -50,3 +51,4 @@ public static class ImageHandler
         return image.Clone();
     }
 }
+*/
